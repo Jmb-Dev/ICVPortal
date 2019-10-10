@@ -1,0 +1,255 @@
+﻿
+@model ProyectoTanner.Models.ReporteAbsentismo
+
+@{
+    Layout = null;
+    string JEFE = (string)(Session["UsuarioAprobador"]);
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICV - Portal de AutoServicio</title>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" />
+    <style>
+    </style>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <!--.Fin de links-->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon2.ico">
+
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+</head>
+<body class="usuario">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <ul class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <ul class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="Solicitud">Ingresar Solicitud</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="MisSolicitudes">Mis Solicitudes (historial)</a>
+                        </ul>
+                    </li>
+                    @{
+
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="MiEquipo">Aprobar Solicitudes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="SolicitudMiEquipo">Ingresar Solicitudes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="SolicitudRevisionEquipo">Revision Equipo</a>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                        </div>
+                    </li>
+                    @{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="ReporteAbsentismo">Reporte Aprobacion HH</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="ReporteAbsentismo">Reporte Historial Aprobacion HH</a>
+                                        <div class="dropdown-divider"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="LogOut">Cerrar Sesion</a>
+                        </div>
+                    </li>
+                </ul>
+    </div>
+    <!--/#main-nav-->
+    <header>
+        <div class="container" style="width:100%">
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                @if (ViewBag.Mostrar != null)
+                {
+                    <div class="alert alert-warning">
+                        <strong>@ViewBag.Mensaje</strong>
+                    </div>
+                }
+                <h3>Reporte Absentismo-Mi Equipo</h3>
+                <div class="espacio-25"></div>
+                <table id="tblEquipo" class="table table-striped">
+                    <thead>
+                        <tr>
+                            @*<th scope="col">Rut</th>*@
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cargo</th>
+                            <th scope="col">Tipo Absentismo</th>
+                            <th scope="col">Fecha Inicio</th>
+                            <th scope="col">Fecha Fin</th>
+                            <th scope="col">N° Dias Registrados</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in ViewBag.Milistado)
+                            {
+                                <tr>
+                                    @*<td nowrap>@item.RUT</td>*@
+                                    <td nowrap>@item.NOMBRE</td>
+                                    <td nowrap>@item.POSICION</td>
+                                    <td nowrap>@item.TIP_AB</td>
+                                    <td nowrap>@item.FECINI</td>
+                                    <td nowrap>@item.FECFIN</td>
+                                    <td nowrap>@item.N_DIAS</td>
+                                </tr>
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Modal Ficha Personal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+                            Ingrese su descripción
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            <fieldset>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="Txt_Descrp" runat="server" rows="5" cols="20" maxlength="200"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="Btn_cerrar" data-dismiss="modal" onclick="limpiarFormulario();">
+                            Cerrar
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header><!--/#home-->
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.es.min.js"></script>
+
+    @*@section Scripts{*@
+
+    <script type="text/javascript">
+        function ShowModal() {
+            $('#myModal').modal('show');
+
+        }
+    </script>
+    <script>
+        $("#Btn_cerrar").on("click", function () {
+            $('#Txt_Descrp').val('');
+        });
+    </script>
+
+    <script>
+        // Funcion Para Filtrar Grilla
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("tblEquipo");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+
+    @*  *@}
+</body>
+
+</html>
+
+

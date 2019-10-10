@@ -1,0 +1,350 @@
+﻿@using ProyectoTanner.Models
+
+@model ProyectoTanner.Models.SolicitudVaca
+
+@{
+
+
+    Layout = null;
+    decimal dtotal = 0;
+    string Mensaje = string.Empty;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICV - Portal de AutoServicio</title>
+
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon2.ico">
+
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+    @* Link Popup *@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body class="inicio">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <ul class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <ul class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="Solicitud">Solicitud de vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="MisSolicitudes">Mis Solicitudes (historial)</a>
+                        </ul>
+                    </li>
+                    @{
+                        string JEFE = (string)(Session["UsuarioAprobador"]);
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                        </div>
+                    </li>
+                    @{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        @*@foreach (var item in Model)
+                            {*@
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
+                        @*}*@
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="LogOut">Cerrar Session</a>
+                        </div>
+                    </li>
+                </ul>
+    </div>
+    <!--/#main-nav-->
+    <header>
+        <div class="container">
+
+            @if (ViewBag.ocultar)//Ocultar Div
+            {
+                <div id="div" class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    @if (ViewBag.Mostrar != null)
+                    {
+                        <div class="alert alert-warning">
+                            <strong>@ViewBag.Mensaje</strong>
+                        </div>
+                    }
+                    else
+                    {
+                    }
+                    <h3>Solicitud de Vacaciones y/o Permisos</h3>
+                    <div class="espacio-25"></div>
+                    @using (Html.BeginForm("Solicitud", "HOME", FormMethod.Post))
+                    {
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                Tipo
+                            </div>
+                            <div class="col-sm-3 col-xs-10">
+                                <div class="form-group">
+                                    @Html.DropDownList("DropSoli", new SelectList(ViewBag.Milistado3, "coD_TIP", "deS_TIP"), new { @class = "form-control", onchange = "this" })
+                                    <span id="span"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divthree" class="editor-field" style="display:none">
+                            <div class="row">
+                                <div class="col-sm-1 col-xs-2">
+                                    Tipo Permiso
+                                </div>
+                                <div class="col-sm-3 col-xs-10">
+                                    <div class="form-group">
+                                        @*  @Html.DropDownList("DropPerm", new SelectList(ViewBag.MiPermi, "COD", "TEXT"), new { @class = "form-control" })*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                Desde
+                            </div>
+                            <div class="col-sm-2 col-xs-4">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <div class='input-group date' id="self_fechadesde">
+                                            @Html.TextBoxFor(a => a.FecDesde, new { @class = "form-control", @placeholder = "Desde", required = "requered" })
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 hidden-xs"></div>
+                            <div class="col-sm-1 col-xs-2">
+                                Hasta
+                            </div>
+                            <div class="col-sm-2 col-xs-4">
+                                <div class="form-group">
+                                    <div class="input-group date" id="self_fechasta">
+                                        @Html.TextBoxFor(a => a.FecHasta, new { @class = "form-control", @placeholder = "Hasta", required = "requered" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                <button type="submit" value="Solicitud" class="btn-primary btn-form btn-fullwidth">Solicitar</button>
+                            </div>
+                        </div>
+                        <div class="espacio-25"></div>
+                        <div id="prueba" runat="server"></div>
+                    }
+                </div>
+            }
+
+            @*//Vacaciones sin uso de días Add Jaime Marchant B 14.09.2019*@
+            @if (ViewBag.ocultar2)
+            {
+                using (Html.BeginForm("Solitsinusodias", "HOME", FormMethod.Post))
+                {
+                    <div id="div2" run class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                        @if (ViewBag.Mostrar != null)
+                        {
+                            <div class="alert alert-warning">
+                                <strong>@ViewBag.Mensaje</strong>
+                            </div>
+                        }
+                        <h3>Vacaciones sin uso dias</h3>
+                        <div class="espacio-25"></div>
+
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                Tipo
+                            </div>
+                            <div class="col-sm-3 col-col-xs-4">
+                                <div class="form-group">
+                                    @*@Html.DropDownList("DropSoli2", new SelectList(ViewBag.Milistado3, "COD_TIP", "DES_TIP"), new { @class = "form-control" })*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-1 col-xs-2">
+                                N° Dias
+                            </div>
+                            <div class="col-sm-3 col-col-xs-4">
+                                <div class="form-group">
+                                    @*@Html.DropDownList("DropDias", new SelectList(ViewBag.dias), new { @class = "form-control" })*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <div class="form-group">
+                                <button type="submit" class="btn-primary btn-form btn-fullwidth">Solicitar</button>
+                            </div>
+                        </div>
+                        <div class="espacio-25"></div>
+                    </div>
+                }
+            }
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+
+                <h3>Saldo de Vacaciones y/o Permisos</h3>
+                <div class="espacio-25"></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Generados</th>
+                            <th scope="col">Utilizados</th>
+                            <th scope="col">Disponibles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @try
+                        {
+                            foreach (var item in ViewBag.Milistado)
+                            {
+                                <tr>
+                                    <td>@item.ktext</td>
+                                    <td>@item.anzhl</td>
+                                    <td>@item.kverb</td>
+                                    <td>@item.dispo</td>
+                                </tr>
+
+                                dtotal = dtotal + Convert.ToDecimal(item.dispo);
+                            }
+                        }
+                        catch (Exception ex) { }
+
+                        <tr>
+                            <td colspan="3" class="text-right">Total disponible:</td>
+                            <td>@dtotal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </header><!--/#home-->
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.es.min.js"></script>
+
+    <script type="text/javascript">
+        function modal() {
+            $('#myModal').modal('show');
+        }
+    </script>
+    <script type="text/javascript">
+        function DisparaAlert() {
+            alert('hola');
+        }
+        function modal() {
+            $('#myModal').modal('show');
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#DropSoli").change(function () {
+                var a = $(this).val()
+                if (a == "3010") {
+                    document.getElementById("divthree").style.display = 'block';
+
+                } else {
+                    document.getElementById("divthree").style.display = 'none';
+                }
+            })
+        })
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#self_fechadesde').datepicker({
+                dateFormat: "dd-mm-yy",
+                language: 'es',
+                autoclose: true
+            });
+        });
+        $(function () {
+            $('#self_fechasta').datepicker({
+                dateFormat: "dd-mm-yy",
+                language: 'es',
+                autoclose: true
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('form input[type=submit]').click(function () {
+                return confirm('Rollback deletion of candidate table?');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

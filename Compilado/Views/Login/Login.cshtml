@@ -1,0 +1,131 @@
+﻿@model ProyectoTanner.Models.User
+@{
+    ViewBag.Title = "Iniciar sesi�n";
+    Layout = null;
+}
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tanner - Portal de AutoServicio</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+</head><!--/head-->
+<body class="login">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <header>
+        <div class="container">
+            <div class="col-xs-10 col-sm-6 col-xs-offset-1 col-sm-offset-3 marco-login wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <img src="~/images/logo-tanner-azul.png" class="img-responsive center-block espacio-25" />
+                @*<form id="loginForm">*@
+                    @using (Html.BeginForm("Login","Login", FormMethod.Post))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.TextBoxFor(a=>a.Name , new { @class = "form-control", @placeholder = "Usuario" })
+                            @*@Html.ValidationMessageFor(m => m.Usuario, "", new { @class = "text-danger" })*@
+                        </div>
+                        <div class="form-group">
+                            @Html.TextBoxFor(a=>a.Password, new { @class = "form-control", @placeholder = "Password" })
+                            @*@Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })*@
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" value="Login" class="btn-submit btn-fullwidth">Entrar</button>
+                        </div>
+                    }
+                @*</form>*@
+
+
+
+                @*<form name="contact-form" method="get" class="espacio-25">
+                        <div class="form-group">
+                            <input type="text" name="nombre" class="form-control" placeholder="Ingrese usuario" required="required">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="clave" class="form-control" placeholder="Ingrese clave">
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn-submit btn-fullwidth">Entrar</button>
+                        </div>
+                    </form>*@
+                <div>
+                </div>
+
+            </div>
+        </div>
+    </header><!--/#home-->
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+</body>
+</html>
+
+
+@*<h2>@ViewBag.Title.</h2>
+    <div class="row">
+        <div class="col-md-8">
+            <section id="loginForm">
+                @using (Html.BeginForm("Login", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <h4>Use una cuenta local para iniciar sesi�n.</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-10">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                @Html.LabelFor(m => m.RememberMe)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Iniciar sesi�n" class="btn btn-default" />
+                        </div>
+                    </div>
+                    <p>
+                        @Html.ActionLink("Registrar como nuevo usuario", "Register")
+                    </p>
+                }
+            </section>
+        </div>
+    </div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

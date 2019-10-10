@@ -1,0 +1,225 @@
+﻿@using ProyectoTanner.Models
+@model List<ProyectoTanner.Models.ListadoSolicitudesHistoricoVigente>
+
+@{
+    Layout = null;
+    string FecHoy = string.Empty;
+    string fecSolic = string.Empty;
+    string Docnr = string.Empty;
+   
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICV - Portal de AutoServicio</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon2.ico">
+</head>
+<body class="login">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <ul class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <ul class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="Solicitud">Solicitud de vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="MisSolicitudes">Mis Solicitudes (historial)</a>
+                        </ul>
+                    </li>
+                    @{
+                        string JEFE = (string)(Session["UsuarioAprobador"]);
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="MiEquipo">Aprobar Vacaciones</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="SolicitudMiEquipo">Registrar solicitudes</a>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="LogOut">Cerrar Session</a>
+                        </div>
+                    </li>
+                </ul>
+    </div>
+    <!--/#main-nav-->
+    <header>
+        <div class="container">
+
+            @if (ViewBag.Mostrar != null)
+            {
+                <div class="alert alert-warning">
+                    <strong>@ViewBag.Mensaje</strong>
+                </div>
+            }
+
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>Mis solicitudes</h3>
+                <div class="espacio-25"></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Fecha Solicitud</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Desde</th>
+                            <th scope="col">Hasta</th>
+                            <th scope="col">Días</th>
+                            <th scope="col">Estado</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.ObtenerVacHistorico)
+                        {
+                            FecHoy = Convert.ToString(DateTime.Now.ToString("dd-MM-yyyy"));
+                            fecSolic = item.AEDTM;
+                            Docnr = item.DOCNR;
+                           
+
+                            <tr>
+                                <td>@item.AEDTM</td>
+                                <td>@item.ATEXT</td>
+                                <td>@item.BEGDA</td>
+                                <td>@item.ENDDA</td>
+                                <td>@item.ABRTG</td>
+                                <td>@item.STATU</td>
+
+
+                                @if (item.STATU == "Enviado" || item.STATU == "En aprobación")
+                                {
+                                    if (fecSolic == FecHoy)
+                                    {
+                                        <td colspan="2" style="text-align:center;">
+                                            <button type="button" value="Anular" onclick="location.href='@Url.Action("Anular", "Home",new { Docnr = Docnr })'" class="btn-primary btn-form btn-fullwidth">Anular</button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td colspan="2" style="text-align:center;"> <p><br /></p></td>
+                                    }
+                                }
+                                else if (item.STATU == "Aprobado" || item.STATU == "Aprobado por sistema")
+                                {
+                                    <td colspan="2" style="text-align:center;">
+                                        <p>
+
+                                            <button type="button" id="Ver_Sol" name="Ver_Sol" class="anchorDetail btn-primary btn-form btn-fullwidth" data-id="@Docnr" data-fec1="@item.BEGDA" data-fec2="@item.ENDDA" data-dias="@item.ABRTG" >
+                                                Ver
+                                            </button></p>
+                                     </td>
+
+                                }
+                                else
+                                {
+                                    <td colspan="2" style="text-align:center;"> <p><br /></p></td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id='myModal' class='modal'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'></div>
+                </div>
+            </div>
+        </div>
+
+  
+      
+    </header><!--/#home-->
+   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+
+    <script>
+
+        var TeamDetailPostBackURL = 'VerSolicitud';
+
+    $(document).ready(function(){
+        $(".anchorDetail").click(function () {
+                    debugger;
+                    var $buttonClicked = $(this);
+                    var id = $buttonClicked.attr('data-id');
+                    var fec1 = $buttonClicked.attr('data-fec1');
+                    var fec2 = $buttonClicked.attr('data-fec2');
+                    var dias = $buttonClicked.attr('data-dias');
+                    var options = { "backdrop": "static", keyboard: true };
+                    $.ajax({
+                        type: "GET",
+                        url: TeamDetailPostBackURL,
+                        contentType: "application/json; charset=utf-8",
+                        data: { "Id": id, "Fec1": fec1, "Fec2": fec2, "Dias": dias },
+                        datatype: "json",
+                        success: function (data) {
+                            debugger;
+                            $('#myModalContent').html(data);
+                            $('#myModal').modal(options);
+                            $('#myModal').modal('show');
+
+                        },
+                        error: function () {
+                            alert("Dynamic content load failed.");
+                        }
+                    });
+        });
+    });
+    </script>
+
+    
+</body >
+</html >

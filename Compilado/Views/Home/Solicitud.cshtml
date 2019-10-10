@@ -1,0 +1,200 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tanner - Portal de AutoServicio</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/lightbox.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="images/favicon.ico">
+</head>
+<body class="vacaciones">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="inicio.html">
+                    <h1><img class="img-responsive" src="images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="inicio.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="vacaciones.html">Solicitud de vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="mis_solicitudes.html">Mis Solicitudes (historial)</a>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="mi-equipo.html">Aprobar vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="reg_solicitud_miequipo.html">Registrar solicitudes</a>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="liquidaciones.html">Liquidación de sueldo</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="antiguedad.html">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="caja-los-andes.html">Remuneración</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Guillermo Cifuentes</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="login.html">Cerrar Sesión</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><!--/#main-nav-->
+    <header>
+        <div class="container">
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>Saldo de vacaciones</h3>
+                <div class="espacio-25"></div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Generados</th>
+                            <th scope="col">Utilizados</th>
+                            <th scope="col">Disponibles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vacaciones Legales</td>
+                            <td>3.00</td>
+                            <td>2.00</td>
+                            <td>1.00</td>
+                        </tr>
+                        <tr>
+                            <td>Vacaciones Progresivas</td>
+                            <td>6.00</td>
+                            <td>2.00</td>
+                            <td>4.00</td>
+                        </tr>
+                        <tr>
+                            <td>Vacaciones medio día</td>
+                            <td>1.00</td>
+                            <td>0.50</td>
+                            <td>0.50</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3" class="text-right">Total disponible:</td>
+                            <td>5.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>Solicitud de vacaciones</h3>
+                <div class="espacio-25"></div>
+                <form id="main-contact-form" name="contact-form" method="post" action="#">
+                    <div class="row">
+                        <div class="col-sm-1 col-xs-2">
+                            Tipo
+                        </div>
+                        <div class="col-sm-3 col-xs-10">
+                            <div class="form-group">
+                                <select class="custom-select" id="inputGroupSelect01">
+                                    <option selected>Elije una...</option>
+                                    <option value="1">Vacaciones Legales</option>
+                                    <option value="2">Vacaciones Progresivas</option>
+                                    <option value="3">Vacaciones medio día</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1 col-xs-2">
+                            Desde
+                        </div>
+                        <div class="col-sm-2 col-xs-4">
+                            <div class="form-group">
+                                <input type="text" name="desde" class="form-control" placeholder="Desde" required="required">
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-xs-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn-primary btn-form btn-fullwidth"><i class="fa fa-close"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-xs-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn-primary btn-form btn-fullwidth"><i class="fa fa-calendar"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-sm-2 hidden-xs"></div>
+                        <div class="col-sm-1 col-xs-2">
+                            Hasta
+                        </div>
+                        <div class="col-sm-2 col-xs-4">
+                            <div class="form-group">
+                                <input type="text" name="desde" class="form-control" placeholder="Desde" required="required">
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-xs-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn-primary btn-form btn-fullwidth"><i class="fa fa-close"></i></button>
+                            </div>
+                        </div>
+                        <div class="col-sm-1 col-xs-3">
+                            <div class="form-group">
+                                <button type="submit" class="btn-primary btn-form btn-fullwidth"><i class="fa fa-calendar"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-xs-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn-primary btn-form btn-fullwidth">Solicitar</button>
+                        </div>
+                    </div>
+                    <div class="espacio-25"></div>
+                </form>
+            </div>
+        </div>
+    </header><!--/#home-->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/wow.min.js"></script>
+    <script type="text/javascript" src="js/lightbox.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>

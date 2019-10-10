@@ -1,0 +1,275 @@
+﻿@using ProyectoTanner.Models
+
+@model ProyectoTanner.Models.EquipoTrabajo
+
+@{
+    Layout = null;
+    string Mensaje = string.Empty;
+    int Num;
+    string RutColabor;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICV - Portal de AutoServicio</title>
+    <!--.Fin de links-->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon2.ico">
+
+    <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+</head>
+<body class="usuario">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <ul class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <ul class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("Solicitud", "Home")">Solicitud de vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("MisSolicitudes", "Home")">Mis Solicitudes (historial)</a>
+                        </ul>
+                    </li>
+                    @{
+                        string JEFE = (string)(Session["UsuarioAprobador"]);
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("VerLiquidacion", "Home")">Liquidación</a>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("Antiguedad", "Home")">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("Remuneracion", "Home")">Remuneración</a>
+                        </div>
+                    </li>
+
+                    <!-- Codigo nuevo -->
+                    @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Equipo Trabajo <span class="caret"></span></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="@Url.Action("Index", "EquipoTrabajo")">Equipo Trabajo</a>
+                            </div>
+                        </li>*@
+
+                    @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Incidentes de Nómina <span class="caret"></span></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="@Url.Action("Index", "IncidentesNomina")">Incidentes de Nómina</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("Graficos", "IncidentesNomina")">Graficos</a>
+                            </div>
+                        </li>*@
+
+                    @*<li class="dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Organigrama <span class="caret"></span></a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="@Url.Action("Index", "Organigrama")">Organigrama</a>
+                            </div>
+                        </li>*@
+                    <!-- FIN - Codigo nuevo -->
+                    @*  <li class="dropdown">*@
+                    @*@foreach (var item in Model)
+                        {*@
+                    @*  <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>*@
+                    @*}*@
+                    @*<div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("LogOut", "Home")">Cerrar Sesion</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("Index", "AdmContenido")">Administrar Contenido</a>
+                        </div>*@
+                    @*  </li>*@
+                </ul>
+    </div>
+    <!--/#main-nav-->
+    <header>
+        <div class="container">
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                @if (ViewBag.Mostrar != null)
+                {
+                    <div class="alert alert-warning">
+                        <strong>@ViewBag.Mensaje</strong>
+                    </div>
+                }
+                <h3>Equipo de Trabajo</h3>
+                <div class="form-group pull-right">
+                    <input type="text" class="search form-control" placeholder="Buscar" id="myInput" onkeyup="myFunction()">
+                </div>
+                <div class="espacio-25"></div>
+                @using (Html.BeginForm("enviar", "HOME", FormMethod.Post))
+                {
+
+                    <table id="tblEquipo" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">Rut</th>
+                                <th scope="col">Nombre Trabajador</th>
+                                <th scope="col">Descripción Posición</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @try
+                            {
+                                foreach (var item in ViewBag.ListaColaborades)
+                                {
+                                    //RutColabor = item.ICNUM + "-" + item.VORNA;
+                                    RutColabor = item.ICNUM;
+
+                                    <tr>
+                                        <td>
+                                            @*@Html.RadioButtonFor(m => m.Rut, RutColabor, new { id = item.ICNUM, required = "requered" })*@
+                                            @Html.CheckBoxFor(it => it.check, new { @unchecked = "unchecked", value = RutColabor })
+                                        </td>
+                                        <td>@item.ICNUM</td>
+                                        <td>@item.VORNA</td>
+                                        <td>@item.ZTEXTPLANS</td>
+                                    </tr>
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+
+                        </tbody>
+                    </table>
+                    <div class="espacio-25"></div>
+
+                    <div class="form-group" style="width:50%">
+                        <label for="camp1">Mensaje:</label>
+                        @Html.TextArea("Mensaje", "", new { @class = "form-control", @cols = 50, @rows = 2 })  
+
+                    </div>
+                    <div class="espacio-25"></div>
+                    <div class="form-group pull-right">
+                        @Html.TextBox("ACCION", "M", new { style = "display:none;" })
+                        <button type="submit" value="Solicitud" class="btn-primary btn-form btn-fullwidth">Eliminar/Modificar Equipo</button>
+                    </div>
+                    <div class="espacio-25"></div>
+                }
+            </div>
+        </div>
+        <div class="container">
+            @using (Html.BeginForm("enviar", "HOME", FormMethod.Post, new { @class = "form-inline"}))
+            {
+                <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <h3>Agregar Trabajador</h3>
+                    <div class="espacio-25"></div>
+                    <div class="container">
+                        @*<form class="form-inline" role="form">*@
+                            <div class="form-group">
+                                <label for="camp1">Rut:</label>
+                                @Html.TextBox("RutColabor", "", new { @style = "display:hidden;" })
+                            </div>
+                            <div class="form-group">
+                                <label for="camp2">Nombre Trabajador:</label>
+                                @Html.TextBox("Nombre", "", new { @style = "display:hidden;" })
+                            </div>
+                            <div class="form-group">
+                                <label for="camp3">Descripción Posición:</label>
+                                @Html.TextBox("Posicion", "", new { @style = "display:hidden;" })
+                            </div>
+                        @*</form>*@
+                        <div class="espacio-25"></div>
+
+                        <div class="form-group" style="width:50%">
+                            <label for="camp1">Mensaje:</label>
+                            <br />
+                            @Html.TextArea("Mensaje", "", new { @class = "form-control", @cols = 80, @rows = 2 })                     
+                        </div>
+                    </div>
+                    <div class="espacio-25"></div>
+                    <div class="form-group pull-right">                     
+                            @Html.TextBox("ACCION", "A", new { style = "display:none;" })
+                        <button type="submit" value="Solicitud" class="btn-primary btn-form btn-fullwidth">Agregar al Equipo</button>
+                    </div>
+                    <div class="espacio-25"></div>
+                </div>
+            }
+        </div>
+
+    </header><!--/#home-->
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/locales/bootstrap-datepicker.es.min.js"></script>
+
+    @*@section Scripts{*@
+    <script>
+        $("#Btn_cerrar").on("click", function () {
+            $('#Txt_Descrp').val('');
+        });
+    </script>
+
+    <script>
+        // Funcion Para Filtrar Grilla
+        function myFunction() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("tblEquipo");
+            tr = table.getElementsByTagName("tr");
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+﻿@model List<ProyectoTanner.Models.InformacionColaboradores>
+
+@{
+        Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Tanner - Portal de AutoServicio</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon.ico">
+</head>
+<body class="inicio">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="inicio.html">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud<span class="caret"></span></a>                
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">@Html.ActionLink("Solicitud de vacaciones", "Solicitud", "Home")</li>
+                            <li class="dropdown-item">@Html.ActionLink("Mis Solicitudes (historial)","MisSolicitudes", "Home")</li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="">Aprobar vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="reg_solicitud_miequipo.html">Registrar solicitudes</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="liquidaciones.html">Liquidación de sueldo</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="antiguedad.html">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="caja-los-andes.html">Remuneración</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        @*@foreach (var item in Model)
+                        {*@
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"])</a>
+                        @*}*@           
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item">@Html.ActionLink("Cerrar Session", "Login", "Home")</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div><!--/#main-nav-->
+    <header>
+        <div class="container">
+            <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <div class="row">
+                    <div class="text-center col-sm-8 col-sm-offset-2">
+                        <h2 class="home-titulo">Portal de <span>AutoServicio</span><br>Recursos Humanos</h2>
+                        <p class="home-bajada">En éste portal puedes consultar y bajar tus liquidaciones de sueldo, solicitar tus vacaciones y descargar cuantas veces necesites tus certificados de antigüedad.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header><!--/#home-->
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+</body>
+</html>

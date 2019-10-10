@@ -1,0 +1,133 @@
+﻿@model ProyectoTanner.Models.ColaboradresJerarquia
+
+@{
+    Layout = null;
+
+    string NombreColabor = string.Empty;
+    string RutColabor = string.Empty;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICV - Portal de AutoServicio</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/bootstrap-select.css">
+
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon2.ico">
+</head><!--/head-->
+<body class="vacaciones">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <ul class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <ul class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="Solicitud">Solicitud de vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="MisSolicitudes">Mis Solicitudes (historial)</a>
+                        </ul>
+                    </li>
+                    @{
+                        string JEFE = (string)(Session["UsuarioAprobador"]);
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <a class="dropdown-item" href="MiEquipo">Aprobar Vacaciones</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="SolicitudMiEquipo">Registrar solicitudes</a>
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        @*@foreach (var item in Model)
+                            {*@
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
+                        @*}*@
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="LogOut">Cerrar Session</a>
+                        </div>
+                    </li>
+                </ul>
+    </div>
+    <!--/#main-nav-->
+    <header>
+        <div class="container">
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>Seleccione colaborador</h3>
+                <div class="espacio-25"></div>
+                @using (Html.BeginForm(FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-10">
+                            <div class="form-group">
+                                @Html.DropDownList("Namedrop", new SelectList(ViewBag.ListaColaborades, "ICNUM", "VORNA"), new { @class = "selectpicker", data_live_search = "true"})
+                               
+                            </div>
+                        </div>
+                        <div class="col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                @*@Html.TextBox("ACCION", "M", new { style = "display:none;" })*@
+                                <button type="submit" value="SolicitudMiEquipo2" class="btn-primary btn-form btn-fullwidth">Solicitar</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </header><!--/#home-->
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap-select.js"></script>
+</body>
+</html>

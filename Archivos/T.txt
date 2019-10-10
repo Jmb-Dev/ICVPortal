@@ -1,0 +1,74 @@
+SolicitudMiEquipo
+
+"SolicitudMiEquipo2", "HOME",
+
+137413892 
+
+cambios
+
+
+
+
+fecSolicitud por fecha solicitud   OK
+mensajes Rfc en pantalla   OK
+Anulacion OK
+
+
+-revision de jefaturas cuando jefe solicita vacaciones debe pasar por etapa de aprobacion OK
+-revision cuando jefe no tiene jefatura superior Campo jefe = Z ( jefeSuperior) 
+-Revision Rfc Aprobacion y Rechazo 
+
+
+
+-revisar boton salir
+-revisar creacion solicitud a mi empleado. OK
+-formato fecha (dd-mm-yy) 
+-Armar PDFs
+-formatear fechas DD/mm/año OK
+-revisar Diseño Menu OK
+
+"SolicitudMiEquipo2", "HOME"
+ onclick="location.href='@Url.Action("SolicitudMiEquipo2", "Home",new { NombreColabor = NombreColabor, RutColabor = RutColabor })'"
+
+Session["UsuarioAprobador"]
+
+ @*@{
+                                    string FecHoy = Convert.ToString(DateTime.Now);
+                                    string fecSolic = @item.AEDTM;
+                                    if (@item.STATU == "Enviado" || @item.STATU == " En aprobación")
+                                    {
+
+                                        if (fecSolic == FecHoy)
+                                        {
+
+                                            <td><button type="submit" class="btn-primary btn-form btn-fullwidth">Anular</button></td>
+                                        }
+
+                                   }
+                                    @*elseif(@item.STATU == "Aprobado" && @JEFE == "Z")
+                                    {
+
+                                    if (fecSolic == FecHoy)
+                                    {
+                                    <td><button type="submit" class="btn-primary btn-form btn-fullwidth">Anular</button></td>
+                                    }
+
+                                    }*@
+                                }*@
+
+INDUMOT23
+
+
+
+ string FecHoy = Convert.ToString(DateTime.Now);
+                                   string fecSolic = @item.AEDTM;
+
+                                    if (@item.STATU == "Enviado" || @item.STATU == " En aprobación")
+                                    {
+
+                                   }
+
+                                    <td><button type="submit" class="btn-primary btn-form btn-fullwidth">Anular</button></td>
+                                    }
+
+                                }
