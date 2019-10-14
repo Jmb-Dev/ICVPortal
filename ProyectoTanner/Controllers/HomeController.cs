@@ -27,6 +27,10 @@ namespace ProyectoTanner.Controllers
         DateTime fec_2;
         string[] results;
 
+
+        //Urls 
+        string UrlSolicitud = "http://164.77.177.179:5055/API/ZHR_GET_CONT?RUT=";
+
         public ActionResult Login(string usuario, string password)
         {
             
@@ -160,33 +164,69 @@ namespace ProyectoTanner.Controllers
 
             string NombreUsuario = (string)(Session["NombreUsuario"]);
             string Usuario = (string)(Session["usuario"]);
+            string Apikey  = (string)(Session["Token"]); 
 
-            string url = "http://164.77.177.179:5055/API/login/GetToken?Username=QHRPORTAL&Password=1234";
+            //string url = "http://164.77.177.179:5055/API/login/GetToken?Username=QHRPORTAL&Password=1234";
 
-            string apikey = new WebClient().DownloadString(url);
-
-            string url_Principal2 = "http://164.77.177.179:5055/API/ZHR_GET_CONT?RUT=";
-            var rut = "12279395-8";
-            var url_2 = url_Principal2 + rut;
-            string key2 = "Bearer " + apikey;
+            //string apikey = new WebClient().DownloadString(url);
+            var rut = Usuario;
+            var url_2 = UrlSolicitud + rut;
+            string key2 = "Bearer " + Apikey;
 
             var json2 = new WebClient();
             json2.Headers.Add("Authorization", key2);
             var Retorno2 = json2.DownloadString(url_2);
-            Retorno2.Remove(0,2);
-            Retorno2 = Retorno2.Remove(Retorno2.Length - 1);
 
 
-            var Convert = JsonConvert.DeserializeObject<RootObject>(Retorno2);            
+            ////var n = json2.DownloadString(url_2);
 
-            JObject json = JObject.Parse(Retorno2);
+            //var m = JsonConvert.DeserializeObject<RootObjectC>(Retorno2);
+
+            //List<_CONTINGENTE> lista = new List<_CONTINGENTE>();
+            //_CONTINGENTE table = new _CONTINGENTE();
+
+            //foreach (var cont in m._CONTINGENTE)
+            //{
+            //    table.anzhl = cont.anzhl;
+            //    table.kverb = cont.kverb;
+            //    table.dispo = cont.dispo;
+            //    table.ktart = cont.ktart;
+            //    table.ktext = cont.ktext;
+            //    lista.Add(table);
+            //}
+
+            //ViewBag.Milistado = lista;
+
+            //var m2 = JsonConvert.DeserializeObject<RootObjectV>(Retorno2);
+
+            //List<_VACACIONES> ListaVaca = new List<_VACACIONES>();
+            //_VACACIONES tableTipVac = new _VACACIONES();
+
+            //foreach (var Vac in m2._VACACIONES)
+            //{
+            //    tableTipVac.coD_TIP = Vac.coD_TIP;
+            //    tableTipVac.deS_TIP = Vac.deS_TIP;
+            //    ListaVaca.Add(tableTipVac);
+            //}
+
+
+
+            //ViewBag.Milistado3 = ListaVaca;
+
+
+            string retorno3 = Retorno2.Remove(0, 1);
+            retorno3 = retorno3.Remove(retorno3.Length - 1);
+
+            var Convert = JsonConvert.DeserializeObject(retorno3);
+
+            JObject json = JObject.Parse(retorno3);
             List<JToken> dataa = json.Children().ToList();
 
             List<_CONTINGENTE> lista = new List<_CONTINGENTE>();
-            List<TipoVacaciones> ListaVaca = new List<TipoVacaciones>();
+            List<_VACACIONES> ListaVaca = new List<_VACACIONES>();
 
             _CONTINGENTE table = new _CONTINGENTE();
-            TipoVacaciones tableTipVac = new TipoVacaciones();
+            _VACACIONES tableTipVac = new _VACACIONES();
 
             foreach (JProperty item in dataa)
             {
@@ -941,7 +981,7 @@ namespace ProyectoTanner.Controllers
                 ANIO = split[1];
 
                 //ViewBag.liquidacion = "../Certificados/FileLiquidacion.ashx?Rut=" + Usuario + "&Mes=" + MES + "&Anio=" + ANIO + "&Usuario=" + Session["usuarioSap"].ToString() + "&Clave=" + Session["contrasenaSap"].ToString() + "";
-                ViewBag.liquidacion   = "../Certificados/FileLiq.ashx?Rut=" + Usuario
+                ViewBag.liquidacion = "../Certificados/FileLiq.ashx?Rut=" + Usuario
                                                                 + "&Mes=" + MES
                                                                 + "&Anio=" + ANIO
                                                                 + "&Tok=" + Session["Token"].ToString()

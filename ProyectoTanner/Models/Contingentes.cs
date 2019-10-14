@@ -25,4 +25,19 @@ namespace ProyectoTanner.Models
             get; set;
         }
     }
+    public class _VACACIONES
+    {
+        public string coD_TIP { get; set; }
+        public string deS_TIP { get; set; }
+    }
+
+    public class RootObjectC
+    {
+        public List<_CONTINGENTE> _CONTINGENTE { get; set; }
+    }
+
+    public class RootObjectV
+    {
+        public List<_VACACIONES> _VACACIONES { get; set; }
+    }
 }

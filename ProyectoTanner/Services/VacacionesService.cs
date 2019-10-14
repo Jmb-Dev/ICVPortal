@@ -13,7 +13,7 @@ namespace ProyectoTanner.Services
 
         public List<ListaVacaciones> ObjSalida = new List<ListaVacaciones>();
         public List<Tablamensaje> Objmensaje = new List<Tablamensaje>();
-        public List<TipoVacaciones> ObjTipo = new List<TipoVacaciones>();
+        public List<_VACACIONES> ObjTipo = new List<_VACACIONES>();
         public List<ListadosolicitudesPendientesAprobacion> ObjPendAprob = new List<ListadosolicitudesPendientesAprobacion>();
         public List<ListadoSolicitudesHistoricoVigente> ListaVacacionesHistorico = new List<ListadoSolicitudesHistoricoVigente>();
         public List<PermisoAdministrativo> ObjPerAdmi = new List<PermisoAdministrativo>();
