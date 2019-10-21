@@ -1536,7 +1536,6 @@ namespace ProyectoTanner.Controllers
 
                 string NombreUsuario = (string)(Session["NombreUsuario"]);
                 string Usuario = (string)(Session["usuario"]);
-                var InformColaborador = new InformacionColaborador();
                 ViewBag.Remuneracion = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
                                                                       + "&Tok=" + Session["Token"].ToString() 
                                                                       + "";
