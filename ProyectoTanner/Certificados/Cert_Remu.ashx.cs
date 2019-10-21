@@ -13,7 +13,7 @@ namespace ProyectoTanner.Certificados
         public void ProcessRequest(HttpContext context)
         {
             var rut = context.Request.QueryString["Rut"];
-            var rem = "";
+            var rem = context.Request.QueryString["Rem"];
             var mot = "XXXXXX";
             string Token = "Bearer  " + context.Request.QueryString["Tok"];
 

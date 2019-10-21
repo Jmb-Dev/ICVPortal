@@ -1507,21 +1507,25 @@ namespace ProyectoTanner.Controllers
         [HttpGet]
         public ActionResult Antiguedad()
         {
-            //try
-            //{
-            //    if (verificaSesion() == true)
-            //    {
-            //        return RedirectToAction("Login", "LOGIN", new { });
-            //    }
 
-            //    string NombreUsuario = (string)(Session["NombreUsuario"]);
-            //    string Usuario = (string)(Session["usuario"]);
-            //    var InformColaborador = new InformacionColaborador();
-            //    ViewBag.Antiguedad = "../Certificados/Certificados.ashx?Rut=" + Usuario + "&Usuario=" + Session["usuarioSap"].ToString() + "&Clave=" + Session["contrasenaSap"].ToString() + "";
-            //}
-            //catch (Exception ex) { }
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
+
+                string NombreUsuario = (string)(Session["NombreUsuario"]);
+                string Usuario = (string)(Session["usuario"]);
+                ViewBag.Remuneracion = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
+                                                                      + "&Tok=" + Session["Token"].ToString()
+                                                                      + "&Rem=" + "X"
+                                                                      + "";
+            }
+            catch (Exception ex) { }
             return View();
         }
+    
 
 
         [HttpGet]
@@ -1537,7 +1541,8 @@ namespace ProyectoTanner.Controllers
                 string NombreUsuario = (string)(Session["NombreUsuario"]);
                 string Usuario = (string)(Session["usuario"]);
                 ViewBag.Remuneracion = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
-                                                                      + "&Tok=" + Session["Token"].ToString() 
+                                                                      + "&Tok=" + Session["Token"].ToString()
+                                                                      + "&Rem=" + ""
                                                                       + "";
             }
             catch (Exception ex) { }
