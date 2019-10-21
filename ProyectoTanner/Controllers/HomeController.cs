@@ -1527,19 +1527,21 @@ namespace ProyectoTanner.Controllers
         [HttpGet]
         public ActionResult Remuneracion()
         {
-            //try
-            //{
-            //    if (verificaSesion() == true)
-            //    {
-            //        return RedirectToAction("Login", "LOGIN", new { });
-            //    }
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
 
-            //    string NombreUsuario = (string)(Session["NombreUsuario"]);
-            //    string Usuario = (string)(Session["usuario"]);
-            //    var InformColaborador = new InformacionColaborador();
-            //    ViewBag.Remuneracion = "../Certificados/Certificados.ashx?Rut=" + Usuario + "&Tipo=" + "X" + "&Usuario=" + Session["usuarioSap"].ToString() + "&Clave=" + Session["contrasenaSap"].ToString() + "";
-            //}
-            //catch (Exception ex) { }
+                string NombreUsuario = (string)(Session["NombreUsuario"]);
+                string Usuario = (string)(Session["usuario"]);
+                var InformColaborador = new InformacionColaborador();
+                ViewBag.Remuneracion = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
+                                                                      + "&Tok=" + Session["Token"].ToString() 
+                                                                      + "";
+            }
+            catch (Exception ex) { }
             return View();
         }
 
