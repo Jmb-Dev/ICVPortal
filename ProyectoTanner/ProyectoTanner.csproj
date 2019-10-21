@@ -197,6 +197,9 @@
     <Compile Include="Certificados\Certificados.ashx.cs">
       <DependentUpon>Certificados.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Certificados\Cert_Remu.ashx.cs">
+      <DependentUpon>Cert_Remu.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Certificados\FileCS.ashx.cs">
       <DependentUpon>FileCS.ashx</DependentUpon>
     </Compile>
@@ -462,6 +465,7 @@
     <Content Include="Certificados\FileCS.ashx" />
     <Content Include="Certificados\Handler1.ashx" />
     <Content Include="Certificados\FileLiq.ashx" />
+    <Content Include="Certificados\Cert_Remu.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Scripts\DatePickerReady.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
