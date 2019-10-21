@@ -10,62 +10,47 @@ using Newtonsoft.Json.Linq;
 using System.Text;
 using System.IO;
 using System.Data;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
-
 using ProyectoTanner.Models;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.Web.Mvc;
 
 namespace ProyectoTanner.Certificados
 {
     /// <summary>
-    /// Descripción breve de FileLiq
+    /// Descripción breve de CertRem
     /// </summary>
-    public class FileLiq : IHttpHandler
+    public class CertRem : IHttpHandler
     {
 
         public void ProcessRequest(HttpContext context)
         {
-
-
-            ////funcionando
-            //var Rut = "RUT=" + context.Request.QueryString["Rut"];
-            //var Mes = "&MES=" + context.Request.QueryString["Mes"];
-            //var Anio = "&PERIODO=" + context.Request.QueryString["Anio"];
-            //string Token = "Bearer  " + context.Request.QueryString["Tok"];
-
-            //para pruebas
-            var Rut = "RUT=" + context.Request.QueryString["Rut"];
-            var Mes = "&MES=07";
-            var Anio = "&PERIODO=2016";
+            var rut = context.Request.QueryString["Rut"];
+            var rem = "X";
+            var mot = "XXXXXX";
             string Token = "Bearer  " + context.Request.QueryString["Tok"];
 
-            var url = "http://164.77.177.179:5055/api/ZHR_MF_LIQSUELD?" + Rut + Mes + Anio + "";
+            var url = "http://164.77.177.179:5055/api/ZHR_MF_REN_ANT?RUT=" + rut + "&REM=" + rem + "&MOT=" + mot + "";
 
             var json2 = new WebClient();
             json2.Headers.Add("Authorization", Token);
+            var result = json2.DownloadString(url);
 
-
-            dynamic result = json2.DownloadString(url);
             JObject json = JObject.Parse(result);
-            byte[] bytes = null;
 
-            for (int i = 0; i < json["LIQUIDACION"][0]["PDF_LIQUI"].Count(); i++)
+            Byte[] bytes2 = null;
+
+            for (int i = 0; i < json["RENTA"][0]["E_PDF"].Count(); i++)
             {
-                bytes = (Byte[])json["LIQUIDACION"][0]["PDF_LIQUI"][i].SelectToken("PDF_LIQUI");
+                bytes2 = (Byte[])json["RENTA"][0]["E_PDF"][i].SelectToken("E_PDF");
             }
 
             context.Response.Buffer = true;
             context.Response.Charset = "";
             context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
             context.Response.ContentType = "application/pdf";
-            context.Response.BinaryWrite(bytes);
+            context.Response.BinaryWrite(bytes2);
             context.Response.Flush();
-
-
-
-
-
 
 
         }
