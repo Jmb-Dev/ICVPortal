@@ -308,74 +308,93 @@ namespace ProyectoTanner.Services
         }
         return lista2;
     }
+    
+    public List<string> ListaCertificado()
+    {
+            List<string> lista2 = new List<string>();
+            lista2.Add("Certificado Antiguedad");
+            lista2.Add("Certificado de Remuneraciones");
+            return lista2;
+    }
 
-
-    //    //Agregado Por Jaime Marchant 05.08.2019
-    //    public List<ZHR_ST_SALIDA> ObtenerDatosAbsentismo(string RUT, string usuario, string contrasena)
-    //    {
-    //        IRfcTable lt_TB_SALIDA;
-
-    //        ZHR_ST_SALIDA SalidaDatosReport;
-
-    //        ConexionController conexion = new ConexionController();
-
-    //        List<ZHR_ST_SALIDA> ListaAbsentismo = new List<ZHR_ST_SALIDA>();
-
-    //        string retorno = "ERROR";
-
-    //        try
-    //        {
-    //            if (!string.IsNullOrEmpty(usuario) && !string.IsNullOrEmpty(contrasena))
-    //                retorno = conexion.connectionsSAP(usuario, contrasena);
-
-    //            if (string.IsNullOrEmpty(retorno))
-    //            {
-    //                //RfcDestination SapRfcDestination = RfcDestinationManager.GetDestination(conexion.connectorConfig);
-    //                //RfcRepository SapRfcRepository = SapRfcDestination.Repository;
-
-    //                //IRfcFunction BapiGetUser = SapRfcRepository.CreateFunction("ZHR_RP_ABSENTISMO");
-
-    //                //BapiGetUser.SetValue("I_RUT", RUT);
-
-    //                //BapiGetUser.Invoke(SapRfcDestination);
-
-    //                //lt_TB_SALIDA = BapiGetUser.GetTable("TB_SALIDA");
-
-    //                //for (int i = 0; i < lt_TB_SALIDA.RowCount; i++)
-    //                //{
-    //                //    SalidaDatosReport = new ZHR_ST_SALIDA();
-    //                //    //SalidaDatosReport.PERNR = lt_TB_SALIDA[i].GetString("PERNR");
-    //                //    SalidaDatosReport.RUT = lt_TB_SALIDA[i].GetString("RUT");
-    //                //    SalidaDatosReport.NOMBRE = lt_TB_SALIDA[i].GetString("NOMBRE");
-    //                //    SalidaDatosReport.POSICION = lt_TB_SALIDA[i].GetString("POSICION");
-    //                //    SalidaDatosReport.T_SOCIEDAD = lt_TB_SALIDA[i].GetString("T_SOCIEDAD");
-    //                //    SalidaDatosReport.DIVISION = lt_TB_SALIDA[i].GetString("DIVISION");
-    //                //    SalidaDatosReport.T_DIVISION = lt_TB_SALIDA[i].GetString("T_DIVISION");
-    //                //    SalidaDatosReport.TIP_AB = lt_TB_SALIDA[i].GetString("TIP_AB");
-    //                //    DateTime fec_ini = Convert.ToDateTime(lt_TB_SALIDA[i].GetString("FECINI"));
-    //                //    SalidaDatosReport.FECINI = fec_ini.ToString("dd/MM/yyyy");
-    //                //    DateTime fec_fin = Convert.ToDateTime(lt_TB_SALIDA[i].GetString("FECFIN"));
-    //                //    SalidaDatosReport.FECFIN = fec_fin.ToString("dd/MM/yyyy");
-    //                //    SalidaDatosReport.N_DIAS = lt_TB_SALIDA[i].GetString("N_DIAS");
-    //                //    ListaAbsentismo.Add(SalidaDatosReport);
-    //                //}
-
-    //            }
-    //            return ListaAbsentismo;
-    //        }
-    //        catch (Exception e)
-    //        {
-    //            System.Diagnostics.Debug.Write(e.StackTrace);
-    //            throw new Exception();
-    //        }
-    //        finally
-    //        {
-    //            SalidaDatosReport = null;
-    //            conexion = null;
-    //        }
-    //    }
+    public List<string> ListaMotivo()
+    {
+        List<string> lista2 = new List<string>();
+        lista2.Add("CCAA - Los andes");
+        lista2.Add("Instituciones Bancarias");
+        lista2.Add("Cooperativas");
+      
+        return lista2;
+    }
 
 
 
-}
+        //    //Agregado Por Jaime Marchant 05.08.2019
+        //    public List<ZHR_ST_SALIDA> ObtenerDatosAbsentismo(string RUT, string usuario, string contrasena)
+        //    {
+        //        IRfcTable lt_TB_SALIDA;
+
+        //        ZHR_ST_SALIDA SalidaDatosReport;
+
+        //        ConexionController conexion = new ConexionController();
+
+        //        List<ZHR_ST_SALIDA> ListaAbsentismo = new List<ZHR_ST_SALIDA>();
+
+        //        string retorno = "ERROR";
+
+        //        try
+        //        {
+        //            if (!string.IsNullOrEmpty(usuario) && !string.IsNullOrEmpty(contrasena))
+        //                retorno = conexion.connectionsSAP(usuario, contrasena);
+
+        //            if (string.IsNullOrEmpty(retorno))
+        //            {
+        //                //RfcDestination SapRfcDestination = RfcDestinationManager.GetDestination(conexion.connectorConfig);
+        //                //RfcRepository SapRfcRepository = SapRfcDestination.Repository;
+
+        //                //IRfcFunction BapiGetUser = SapRfcRepository.CreateFunction("ZHR_RP_ABSENTISMO");
+
+        //                //BapiGetUser.SetValue("I_RUT", RUT);
+
+        //                //BapiGetUser.Invoke(SapRfcDestination);
+
+        //                //lt_TB_SALIDA = BapiGetUser.GetTable("TB_SALIDA");
+
+        //                //for (int i = 0; i < lt_TB_SALIDA.RowCount; i++)
+        //                //{
+        //                //    SalidaDatosReport = new ZHR_ST_SALIDA();
+        //                //    //SalidaDatosReport.PERNR = lt_TB_SALIDA[i].GetString("PERNR");
+        //                //    SalidaDatosReport.RUT = lt_TB_SALIDA[i].GetString("RUT");
+        //                //    SalidaDatosReport.NOMBRE = lt_TB_SALIDA[i].GetString("NOMBRE");
+        //                //    SalidaDatosReport.POSICION = lt_TB_SALIDA[i].GetString("POSICION");
+        //                //    SalidaDatosReport.T_SOCIEDAD = lt_TB_SALIDA[i].GetString("T_SOCIEDAD");
+        //                //    SalidaDatosReport.DIVISION = lt_TB_SALIDA[i].GetString("DIVISION");
+        //                //    SalidaDatosReport.T_DIVISION = lt_TB_SALIDA[i].GetString("T_DIVISION");
+        //                //    SalidaDatosReport.TIP_AB = lt_TB_SALIDA[i].GetString("TIP_AB");
+        //                //    DateTime fec_ini = Convert.ToDateTime(lt_TB_SALIDA[i].GetString("FECINI"));
+        //                //    SalidaDatosReport.FECINI = fec_ini.ToString("dd/MM/yyyy");
+        //                //    DateTime fec_fin = Convert.ToDateTime(lt_TB_SALIDA[i].GetString("FECFIN"));
+        //                //    SalidaDatosReport.FECFIN = fec_fin.ToString("dd/MM/yyyy");
+        //                //    SalidaDatosReport.N_DIAS = lt_TB_SALIDA[i].GetString("N_DIAS");
+        //                //    ListaAbsentismo.Add(SalidaDatosReport);
+        //                //}
+
+        //            }
+        //            return ListaAbsentismo;
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            System.Diagnostics.Debug.Write(e.StackTrace);
+        //            throw new Exception();
+        //        }
+        //        finally
+        //        {
+        //            SalidaDatosReport = null;
+        //            conexion = null;
+        //        }
+        //    }
+
+
+
+    }
 }

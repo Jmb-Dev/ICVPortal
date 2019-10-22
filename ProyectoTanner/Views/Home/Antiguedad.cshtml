@@ -4,7 +4,7 @@
     Layout = null;
 }
 <!DOCTYPE html>
-<html>
+<html lang="es-cl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -88,22 +88,66 @@
     </div>
     <!--/#main-nav-->
 
-    <header>
-        <div class="container">
-            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                <h3>Certificado de Antigüedad General</h3>
-                <div class="espacio-25"></div>
-                <div class="embed-responsive embed-responsive-16by9">
-                    <div class="center">
-                        <p><img src="~/images/loading.gif"</p>
+<header>
+    <div class="container">
+        <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h3>Certificados</h3>
+            <div class="espacio-25"></div>
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        Selecciona el tipo de Certificado
                     </div>
-                    <object class="embed-responsive-item" data="@ViewBag.Antiguedad" type="application/pdf" internalinstanceid="9" title="">
-                        <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
-                    </object>
+                    <div class="col-sm-3 col-xs-5">
+                        <div class="form-group">
+                            @Html.DropDownList("DropMeses", new SelectList(ViewBag.Tipos, "", "", ViewBag.SelectedValue), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @*<div class="col-sm-2 col-xs-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
+                    </div>
+                </div>*@
                 </div>
+            }
+            
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                <div class="row">
+                    <div class="col-sm-3 col-xs-4">
+                        Para ser presentado
+                    </div>
+                    <div class="col-sm-3 col-xs-5">
+                        <div class="form-group">
+                            @Html.DropDownList("DropMeses", new SelectList(ViewBag.Motivos, "", "", ViewBag.SelectedValue), new { @class = "form-control" })
+                        </div>
+                    </div>
+                    @*<div class="col-sm-2 col-xs-3">
+                    <div class="form-group">
+                        <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
+                    </div>
+                </div>*@
+                </div>
+            }
+        </div>
+    </div>
+            
+    <div class="container">
+        <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <h3>Certificado de Antigüedad General</h3>
+            <div class="espacio-25"></div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <div class="center">
+                    <p><img src="~/images/loading.gif"</p>
+                </div>
+                <object class="embed-responsive-item" data="@ViewBag.Antiguedad" type="application/pdf" internalinstanceid="9" title="">
+                    <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
+                </object>
             </div>
         </div>
-    </header><!--/#home-->
+    </div>
+</header><!--/#home-->
 
     <script type="text/javascript" src="~/js/jquery.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>

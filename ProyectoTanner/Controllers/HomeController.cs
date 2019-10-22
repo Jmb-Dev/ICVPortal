@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ProyectoTanner.Services;
-using System.Configuration;
 using ProyectoTanner.Models;
-using System.Globalization;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
-using System.Configuration;
-using System.IO;
-using System.Data;
-using System.Web.UI;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -1517,10 +1507,29 @@ namespace ProyectoTanner.Controllers
 
                 string NombreUsuario = (string)(Session["NombreUsuario"]);
                 string Usuario = (string)(Session["usuario"]);
-                ViewBag.Remuneracion = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
-                                                                      + "&Tok=" + Session["Token"].ToString()
-                                                                      + "&Rem=" + "X"
-                                                                      + "";
+                ViewBag.Antiguedad = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
+                                                                + "&Tok=" + Session["Token"].ToString()
+                                                                + "&Rem=" + "X"
+                                                                + "";
+
+                var InformColaborador = new InformacionColaborador();
+                List<string> lista = new List<string>();
+                lista = InformColaborador.ListaCertificado();
+
+                ViewBag.Tipos = lista;
+                ViewBag.control = "0";
+                ViewBag.mensaje = "";
+
+                List<string> lista2 = new List<string>();
+                lista2 = InformColaborador.ListaMotivo();
+
+                ViewBag.Motivos = lista2;
+                ViewBag.control = "0";
+                ViewBag.mensaje = "";
+
+                //ViewBag.SelectedValue = Value;
+
+
             }
             catch (Exception ex) { }
             return View();
