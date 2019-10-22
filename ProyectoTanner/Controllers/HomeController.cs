@@ -1534,7 +1534,60 @@ namespace ProyectoTanner.Controllers
             catch (Exception ex) { }
             return View();
         }
-    
+
+
+        public ActionResult Antiguedad(FormCollection form)
+        {
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
+
+                string ANIO = string.Empty;
+                string MES = string.Empty;
+                string valor = string.Empty;
+                string Usuario = string.Empty;
+
+                Usuario = (string)(Session["usuario"]);
+
+                var InformColaborador = new InformacionColaborador();
+
+                string Value = Request.Form["DropMeses"];
+
+                string Date = string.Format("{0:dd/MM/yyyy}", Convert.ToDateTime(Value));
+
+                valor = string.Format("{0:MM-yyyy}", Convert.ToDateTime(Date));
+                string[] split = valor.Split(new Char[] { '-' });
+                MES = split[0];
+                ANIO = split[1];
+
+                //ViewBag.liquidacion = "../Certificados/FileLiquidacion.ashx?Rut=" + Usuario + "&Mes=" + MES + "&Anio=" + ANIO + "&Usuario=" + Session["usuarioSap"].ToString() + "&Clave=" + Session["contrasenaSap"].ToString() + "";
+                ViewBag.liquidacion = "../Certificados/FileLiq.ashx?Rut=" + Usuario
+                                                                + "&Mes=" + MES
+                                                                + "&Anio=" + ANIO
+                                                                + "&Tok=" + Session["Token"].ToString()
+                                                                + "";
+
+
+                string meses_atras = "12";
+
+                List<string> lista = new List<string>();
+                lista = InformColaborador.CalculaFecha(Int32.Parse(meses_atras));
+
+                ViewBag.Fechas = lista;
+                ViewBag.control = "1";
+                ViewBag.mensaje = "";
+                ViewBag.SelectMes = Value;
+            }
+            catch (Exception ex) { ViewBag.mensaje = ex.Message; }
+
+            return View();
+        }
+
+     
+
 
 
         [HttpGet]
