@@ -45,96 +45,67 @@ namespace ProyectoTanner.Certificados
             var json2 = new WebClient();
             json2.Headers.Add("Authorization", Token);
 
-            var result = json2.DownloadString(url);
-            //string retorno3 = result.Remove(0, 1);
-            //       retorno3 = retorno3.Remove(retorno3.Length - 1);
+            dynamic result = json2.DownloadString(url);
+            JObject json = JObject.Parse(result);
+            byte[] bytes = null;
 
-            var Convert = JsonConvert.DeserializeObject(result);
-
-            try
+            for (int i = 0; i < json["LIQUIDACION"][0]["PDF_LIQUI"].Count(); i++)
             {
-
-                JObject json = JObject.Parse(result);
-                List<JToken> dataa = json.Children().ToList();
-
-                foreach (JProperty item in dataa)
+                bytes = (Byte[])json["LIQUIDACION"][0]["PDF_LIQUI"][i].SelectToken("PDF_LIQUI");
+                try
                 {
-                    item.CreateReader();
-                    switch (item.Name)
-                    {
-                        case "LIQUIDACION":
-                            foreach (JObject msg in item.Values())
-                            {
 
-                                foreach (JProperty child in msg.Children<JProperty>())
-                                {
-                                    item.CreateReader();
-                                    switch (child.Name)
-                                    {
-                                        case "PDF_LIQUI":
-                                            foreach (JObject msg2 in child.Values())
-                                            {
-                                                Byte[] bytes = (Byte[])System.Text.Encoding.UTF8.GetBytes("PDF_LIQUI"); /*(Byte[])msg2.GetValue("PDF_LIQUI");*/
 
-                                                using (MemoryStream input = new MemoryStream(bytes))
-                                                {
-                                                   using (MemoryStream output = new MemoryStream())
-                                                        {
-                                                            string password = Rut;
-                                                            PdfReader reader = new PdfReader(input);
-                                                            PdfEncryptor.Encrypt(reader, output, true, password, password, PdfWriter.ALLOW_SCREENREADERS);
-                                                            bytes = output.ToArray();
-                                                        }                                                }
+                    context.Response.Buffer = true;
+                    context.Response.Charset = "";
+                    context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    context.Response.ContentType = "application/pdf";
+                    //context.Response.BinaryWrite(bytes);
+                    context.Response.Flush();
+                    context.Response.End();
 
-                                                context.Response.Buffer = true;
-                                                context.Response.Charset = "";
-                                                context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                                                context.Response.ContentType = "application/pdf";
-                                                //context.Response.BinaryWrite(bytes);
-                                                context.Response.Flush();
-                                                context.Response.End();
-
-                                            }
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                }
-                            }
-                            break;
-                        default:
-                            break;
-                    }
                 }
-            }
-            catch (Exception e)
-            {
-
-                Document document = new Document(PageSize.LETTER, 50, 50, 30, 15);
-                MemoryStream output = new MemoryStream();
-                PdfWriter writer = PdfWriter.GetInstance(document, output);
-                document.Open();
-
-                PdfContentByte cb = writer.DirectContent;
-                cb.Rectangle(50f, 450f, 500f, 350f);
-                Paragraph titulo = new Paragraph(e.Message);
-                titulo.IndentationLeft = 130;
-                document.Add(titulo);
-
-                document.Close();
+                catch (Exception e)
+                {
 
 
-                context.Response.Buffer = true;
-                context.Response.Charset = "";
-                context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
-                context.Response.ContentType = "application/pdf";
-                context.Response.BinaryWrite(output.ToArray());
-                context.Response.Flush();
-                context.Response.End();
-            }
-            finally
-            {
+                    context.Response.Buffer = true;
+                    context.Response.Charset = "";
+                    context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    context.Response.ContentType = "application/pdf";
+                    context.Response.BinaryWrite(bytes);
+                    context.Response.Flush();
 
+
+
+
+                    Document document = new Document(PageSize.LETTER, 50, 50, 30, 15);
+                    MemoryStream output = new MemoryStream();
+                    PdfWriter writer = PdfWriter.GetInstance(document, output);
+                    document.Open();
+
+                    PdfContentByte cb = writer.DirectContent;
+                    cb.Rectangle(50f, 450f, 500f, 350f);
+                    Paragraph titulo = new Paragraph(e.Message);
+                    titulo.IndentationLeft = 130;
+                    document.Add(titulo);
+
+
+                    document.Close();
+
+
+                    context.Response.Buffer = true;
+                    context.Response.Charset = "";
+                    context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                    context.Response.ContentType = "application/pdf";
+                    context.Response.BinaryWrite(output.ToArray());
+                    context.Response.Flush();
+                    context.Response.End();
+                }
+                finally
+                {
+
+                }
             }
         }
         public bool IsReusable

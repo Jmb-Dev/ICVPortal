@@ -11,4 +11,6 @@ namespace ProyectoTanner.Models
         public string FecHasta { get; set; }
         public string TipoVaca { get; set; }
     }
+
+  
 }

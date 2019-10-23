@@ -1,10 +1,12 @@
-﻿@model List<ProyectoTanner.Models.InformacionColaboradores>
+﻿@*@model List<ProyectoTanner.Models.InformacionColaboradores>*@
+@using ProyectoTanner.Models
+@model ProyectoTanner.Models.Certificado
 
 @{
     Layout = null;
 }
 <!DOCTYPE html>
-<html>
+<html lang="es-cl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -89,6 +91,85 @@
     <!--/#main-nav-->
 
     <header>
+        <div class="container">
+            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>Certificados</h3>
+                <div class="espacio-25"></div>
+                @using (Html.BeginForm(FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-4">
+                            Selecciona el tipo de Certificado
+                        </div>
+                        <div class="col-sm-3 col-xs-5">
+                            <div class="form-group">
+                                @Html.DropDownList("DropMeses", new SelectList(ViewBag.Tipos, "", "", ViewBag.SelectedValue), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @*<div class="col-sm-2 col-xs-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
+                                </div>
+                            </div>*@
+                    </div>
+                }
+
+                @using (Html.BeginForm(FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-4">
+                            Para ser presentado
+                        </div>
+                        <div class="col-sm-3 col-xs-5">
+                            <div class="form-group">
+                                @Html.DropDownList("DropMeses", new SelectList(ViewBag.Motivos, "", "", ViewBag.SelectedValue), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @*<div class="col-sm-2 col-xs-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
+                                </div>
+                            </div>*@
+                    </div>
+                }
+
+                @using (Html.BeginForm("solici", "HOME", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-4">
+                            Para ser presentado
+                        </div>
+                        <div class="col-sm-3 col-xs-5">
+                            <div class="form-group">
+                                @Html.DropDownList("test1", new SelectList(ViewBag.MiPermi, "COD", "TEXT"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                        @*<div class="col-sm-2 col-xs-3">
+                                <div class="form-group">
+                                    <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
+                                </div>
+                            </div>*@
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-md-5 mb-3">
+                             @Html.TextBoxFor(a => a.valorCred , new { @class = "form-control", @placeholder = "Total Credito", required = "requered" })
+
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <input type="text" class="form-control" placeholder="Cuotas" aria-label="" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <button type="submit" class="btn-primary btn-form btn-fullwidth">Enviar</button>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+
         <div class="container">
             <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <h3>Certificado de Antigüedad General</h3>

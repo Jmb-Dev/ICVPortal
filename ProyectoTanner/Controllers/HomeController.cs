@@ -1,19 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using ProyectoTanner.Services;
-using System.Configuration;
 using ProyectoTanner.Models;
-using System.Globalization;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
-using System.Configuration;
-using System.IO;
-using System.Data;
-using System.Web.UI;
 using System.Net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -1547,39 +1537,105 @@ namespace ProyectoTanner.Controllers
         [HttpGet]
         public ActionResult Antiguedad()
         {
-            //try
-            //{
-            //    if (verificaSesion() == true)
-            //    {
-            //        return RedirectToAction("Login", "LOGIN", new { });
-            //    }
 
-            //    string NombreUsuario = (string)(Session["NombreUsuario"]);
-            //    string Usuario = (string)(Session["usuario"]);
-            //    var InformColaborador = new InformacionColaborador();
-            //    ViewBag.Antiguedad = "../Certificados/Certificados.ashx?Rut=" + Usuario + "&Usuario=" + Session["usuarioSap"].ToString() + "&Clave=" + Session["contrasenaSap"].ToString() + "";
-            //}
-            //catch (Exception ex) { }
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
+
+                string NombreUsuario = (string)(Session["NombreUsuario"]);
+                string Usuario = (string)(Session["usuario"]);
+                ViewBag.Antiguedad = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
+                                                                + "&Tok=" + Session["Token"].ToString()
+                                                                + "&Rem=" + "X"
+                                                                + "";
+
+                var InformColaborador = new InformacionColaborador();
+                List<string> lista = new List<string>();
+                lista = InformColaborador.ListaCertificado();
+
+                ViewBag.Tipos = lista;
+                ViewBag.control = "0";
+                ViewBag.mensaje = "";
+
+                List<string> lista2 = new List<string>();
+                lista2 = InformColaborador.ListaMotivo();
+
+                ViewBag.Motivos = lista2;
+                ViewBag.control = "0";
+                ViewBag.mensaje = "";
+
+                //ViewBag.SelectedValue = Value;
+                VacacionesService VacacionesService2 = new VacacionesService();
+                VacacionesService2.ObtieneDiasPermi();
+                ViewBag.MiPermi = VacacionesService2.ObjPerAdmi  ;
+
+             
+
+            }
+            catch (Exception ex) { }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Antiguedad(FormCollection form)
+        {
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
+
+                
+            }
+            catch (Exception ex) { ViewBag.mensaje = ex.Message; }
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult solici(string valorCred, string cta, FormCollection form)
+        {
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
+
+                string Value = Request.Form["test1"];
+                
+
+            }
+            catch (Exception ex) { ViewBag.mensaje = ex.Message; }
+
+            return View();
+        }
+
+
 
 
         [HttpGet]
         public ActionResult Remuneracion()
         {
-            //try
-            //{
-            //    if (verificaSesion() == true)
-            //    {
-            //        return RedirectToAction("Login", "LOGIN", new { });
-            //    }
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
 
-            //    string NombreUsuario = (string)(Session["NombreUsuario"]);
-            //    string Usuario = (string)(Session["usuario"]);
-            //    var InformColaborador = new InformacionColaborador();
-            //    ViewBag.Remuneracion = "../Certificados/Certificados.ashx?Rut=" + Usuario + "&Tipo=" + "X" + "&Usuario=" + Session["usuarioSap"].ToString() + "&Clave=" + Session["contrasenaSap"].ToString() + "";
-            //}
-            //catch (Exception ex) { }
+                string NombreUsuario = (string)(Session["NombreUsuario"]);
+                string Usuario = (string)(Session["usuario"]);
+                ViewBag.Remuneracion = "../Certificados/Cert_Remu.ashx?Rut=" + Usuario
+                                                                      + "&Tok=" + Session["Token"].ToString()
+                                                                      + "&Rem=" + ""
+                                                                      + "";
+            }
+            catch (Exception ex) { }
             return View();
         }
 
