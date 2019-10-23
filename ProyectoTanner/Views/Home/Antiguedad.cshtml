@@ -159,7 +159,8 @@
 
                         </div>
                         <div class="col-md-4 mb-3">
-                            <input type="text" class="form-control" placeholder="Cuotas" aria-label="" aria-describedby="basic-addon1">
+                            @Html.TextBoxFor(a => a.nrocta, new { @class = "form-control", @placeholder = "Nro Ctas", required = "requered" })
+
                         </div>
                         <div class="col-md-3 mb-3">
                             <button type="submit" class="btn-primary btn-form btn-fullwidth">Enviar</button>
