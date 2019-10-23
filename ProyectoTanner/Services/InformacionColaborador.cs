@@ -17,6 +17,8 @@ namespace ProyectoTanner.Services
         //    //public List<ColaboradresJerarquia> ObjSalida = new List<ColaboradresJerarquia>();
         //    //public List<Tablamensaje> Objmensaje = new List<Tablamensaje>();
 
+        public List<PermisoAdministrativo> ObjPerAdmi = new List<PermisoAdministrativo>();
+
         //    public List<InformacionColaboradores> ObtenerDatos(string RUT,string usuario, string contrasena)
         //    {
         //        IRfcTable lt_T_MENSAJE;
@@ -327,6 +329,19 @@ namespace ProyectoTanner.Services
         return lista2;
     }
 
+        public void ObtieneDiasPermi()
+        {
+            PermisoAdministrativo Permisos = new PermisoAdministrativo();
+            Permisos = new PermisoAdministrativo();
+            Permisos.COD = "3010";
+            Permisos.TEXT = "Permiso 1 dia";
+            ObjPerAdmi.Add(Permisos);
+
+            Permisos = new PermisoAdministrativo();
+            Permisos.COD = "3012";
+            Permisos.TEXT = "Permiso 1/2 dia";
+            ObjPerAdmi.Add(Permisos);
+        }
 
 
         //    //Agregado Por Jaime Marchant 05.08.2019

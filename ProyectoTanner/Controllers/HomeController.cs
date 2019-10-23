@@ -1568,14 +1568,18 @@ namespace ProyectoTanner.Controllers
                 ViewBag.mensaje = "";
 
                 //ViewBag.SelectedValue = Value;
+                VacacionesService VacacionesService2 = new VacacionesService();
+                VacacionesService2.ObtieneDiasPermi();
+                ViewBag.MiPermi = VacacionesService2.ObjPerAdmi  ;
 
+             
 
             }
             catch (Exception ex) { }
             return View();
         }
 
-
+        [HttpPost]
         public ActionResult Antiguedad(FormCollection form)
         {
             try
@@ -1592,7 +1596,25 @@ namespace ProyectoTanner.Controllers
             return View();
         }
 
-     
+        [HttpPost]
+        public ActionResult solici(string valorCred, string cta, FormCollection form)
+        {
+            try
+            {
+                if (verificaSesion() == true)
+                {
+                    return RedirectToAction("Login", "LOGIN", new { });
+                }
+
+                string Value = Request.Form["test1"];
+                
+
+            }
+            catch (Exception ex) { ViewBag.mensaje = ex.Message; }
+
+            return View();
+        }
+
 
 
 
