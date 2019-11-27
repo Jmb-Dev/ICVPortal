@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Configuration;
-using System.IO;
-using System.Data;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
+using System;
+using System.IO;
+using System.Web;
 //using SAP.Middleware.Connector;
-using System.Net;
-using Newtonsoft;
-using Newtonsoft.Json;
 
 namespace ProyectoTanner.Controllers
 {
@@ -25,7 +17,7 @@ namespace ProyectoTanner.Controllers
         {
             try
             {
-               
+
                 string Rut = context.Request.QueryString["Rut"];
                 string Mes = context.Request.QueryString["Mes"];
                 string Anio = context.Request.QueryString["Anio"];
@@ -70,7 +62,7 @@ namespace ProyectoTanner.Controllers
 
                     //obtener datos de api
 
-                    
+
                     context.Response.Buffer = true;
                     context.Response.Charset = "";
                     context.Response.Cache.SetCacheability(HttpCacheability.NoCache);
@@ -78,7 +70,7 @@ namespace ProyectoTanner.Controllers
                     //context.Response.BinaryWrite(bytes);
                     context.Response.Flush();
                     context.Response.End();
-                //}
+                    //}
 
 
                 }
@@ -110,10 +102,10 @@ namespace ProyectoTanner.Controllers
                 }
                 finally
                 {
-                   
+
                 }
 
-                
+
             }
             catch (Exception ex)
             {

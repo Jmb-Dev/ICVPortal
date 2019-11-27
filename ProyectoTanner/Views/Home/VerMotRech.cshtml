@@ -1,0 +1,30 @@
+﻿<div>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Detalle de rechazo</h4>
+    </div>
+
+
+    <div class="modal-body">
+        <div>
+            <div class="form-group">
+                <label for="Solicitud">Solicitud</label>
+                <input type="text" class="form-control" id="Solicitud" placeholder="@ViewBag.solicitud" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="motivoRechazo">motivo de rechazo</label>
+            <textarea class="form-control" id="motivoRechazo" rows="3" placeholder="@ViewBag.msn" disabled></textarea>
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+        <button type="button" value="Cerrar" onclick="location.href='@Url.Action("CerrarSolicitud", "Home")'" class="btn btn-secondary btn-form" data-dismiss="modal">Cerrar</button>
+    </div>
+
+
+
+
+</div>

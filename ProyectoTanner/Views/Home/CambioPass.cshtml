@@ -1,0 +1,192 @@
+﻿@*@model List<ProyectoTanner.Models.InformacionColaboradores>*@
+@using ProyectoTanner.Models
+@model ProyectoTanner.Models.Certificado
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="es-cl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>ICV - Portal de AutoServicio</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/css/animate.min.css" rel="stylesheet">
+    <link href="~/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/lightbox.css" rel="stylesheet">
+    <link href="~/css/main.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="~/images/favicon2.ico">
+</head>
+<body class="antiguedad">
+    <!--.preloader-->
+    <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <!--/.preloader-->
+    <div class="main-nav">
+        <ul class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="Index">
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
+                </a>
+            </div>
+            <ul class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"> @Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="Solicitud">Solicitud de vacaciones</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="MisSolicitudes">Mis Solicitudes (historial)</a>
+                        </ul>
+                    </li>
+                    @{
+                        string JEFE = (string)(Session["UsuarioAprobador"]);
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    @*<div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>*@
+                                </ul>
+                            </li>
+                        }
+                    }
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
+                        <div class="dropdown-menu">
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
+                        </div>
+                    </li>
+                    @*@{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }*@
+                    <li class="dropdown">
+                        @*@foreach (var item in Model)
+                        {*@
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
+                        @*}*@
+                        <div class="dropdown-menu">
+
+
+
+                            <a class="dropdown-item" href="CambioPass">Cambiar password</a>
+                            <a class="dropdown-item" href="LogOut">Cerrar Session</a>
+                        </div>
+                    </li>
+                </ul>
+    </div>
+
+    <header>
+
+        <div class="container">
+            <div class="col-xs-10 col-sm-6 col-xs-offset-1 col-sm-offset-3 marco-login wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+              
+                <h3>Cambio de Contraseña</h3>
+                    <hr />
+                
+                    <div class="form-group pass_show">
+
+                        <input id="pass1" type="password" value="" class="form-control" >
+                    </div>
+                    <div class="form-group pass_show">
+                        <input id="pass2" type="password" value="" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" value="Login" class="btn-submit btn-fullwidth">Realizar Cambio</button>
+                    </div>
+                
+                <div>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </header><!--/#home-->
+
+
+    <script type="text/javascript" src="~/js/jquery.js"></script>
+    <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="~/js/main.js"></script>
+    <script type="text/javascript" src="~/js/Pass.js"></script>
+    <script>
+        
+$(document).on('click', '.btn-submit', function (e) {
+    var pass1 = document.getElementById('pass1').value;
+    
+    var pass2 = document.getElementById('pass2').value;
+    console.log(pass1 + "   " + pass2);
+    if (pass1 != pass2) {
+        alert("Contraseñas no coinciden");
+
+    } else {
+        if (pass1.length < 8) {
+            alert("Contraseña debe tener mas de 8 caracteres");
+        } else if(pass1.length > 10){
+             alert("Contraseña debe tener max de 10 caracteres");        
+        } else {
+            var TeamDetailPostBackURL = 'CambioDeContra';
+
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "Pass": pass1 },
+                datatype: "json",
+                success: function (data) {
+                    alert("Contraseña Modificada.");
+                    location.href = "@Url.Action("Index", "Home")";
+
+                },
+                error: function () {
+                    alert("Favor intentar mas tarde");
+                }
+            });
+
+        }
+    }
+});
+    </script>
+</body>
+</html>
+

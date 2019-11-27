@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 //using SAP.Middleware.Connector;
 using ProyectoTanner.Models;
-using ProyectoTanner.Controllers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
-using Newtonsoft;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ProyectoTanner.Services
 {
@@ -18,7 +15,9 @@ namespace ProyectoTanner.Services
         //    //public List<Tablamensaje> Objmensaje = new List<Tablamensaje>();
 
         public List<PermisoAdministrativo> ObjPerAdmi = new List<PermisoAdministrativo>();
-
+        public List<ListaDespegable> ObjMotivo = new List<ListaDespegable>();
+        public List<ListaDespegable> ObjCtas = new List<ListaDespegable>();
+        public List<ListaDespegable> ObjCertif = new List<ListaDespegable>();
         //    public List<InformacionColaboradores> ObtenerDatos(string RUT,string usuario, string contrasena)
         //    {
         //        IRfcTable lt_T_MENSAJE;
@@ -287,60 +286,102 @@ namespace ProyectoTanner.Services
             //}
         }
 
-    public List<string> CalculaFecha(int parametro)
-    {
-        parametro = parametro + 1;
-        DateTime fechaActual = DateTime.Now;
-        List<DateTime> lista = new List<DateTime>();
-        List<string> lista2 = new List<string>();
-        for (int i = 1; i <= parametro; i++)
+        public List<string> CalculaFecha(int parametro)
         {
-            DateTime nuevaFecha;
-            if (lista2.Count == 0)
-            {
-                nuevaFecha = fechaActual.AddMonths(i * -1);
-            }
-            else
-            {
-                nuevaFecha = fechaActual.AddMonths(i * -1);
-            }
-
-            string Date = string.Format("{0:Y}", Convert.ToDateTime(nuevaFecha));
-            lista2.Add(Date.ToUpper());
-        }
-        return lista2;
-    }
-    
-    public List<string> ListaCertificado()
-    {
+            parametro = parametro + 1;
+            DateTime fechaActual = DateTime.Now;
+            List<DateTime> lista = new List<DateTime>();
             List<string> lista2 = new List<string>();
-            lista2.Add("Certificado Antiguedad");
-            lista2.Add("Certificado de Remuneraciones");
+            for (int i = 1; i <= parametro; i++)
+            {
+                DateTime nuevaFecha;
+                if (lista2.Count == 0)
+                {
+                    nuevaFecha = fechaActual.AddMonths(i * -1);
+                }
+                else
+                {
+                    nuevaFecha = fechaActual.AddMonths(i * -1);
+                }
+
+                string Date = string.Format("{0:Y}", Convert.ToDateTime(nuevaFecha));
+                lista2.Add(Date.ToUpper());
+            }
             return lista2;
-    }
+        }
 
-    public List<string> ListaMotivo()
-    {
-        List<string> lista2 = new List<string>();
-        lista2.Add("CCAA - Los andes");
-        lista2.Add("Instituciones Bancarias");
-        lista2.Add("Cooperativas");
-      
-        return lista2;
-    }
+        //public List<string> ListaCertificado()
+        //{
+        //    //List<string> lista2 = new List<string>();
+        //    //lista2.Add("Certificado Antiguedad");
+        //    //lista2.Add("Certificado de Remuneraciones");
+        //    //return lista2;
+        //}
 
-        public void ObtieneDiasPermi()
+        public void ListaCertificado()
         {
-            PermisoAdministrativo Permisos = new PermisoAdministrativo();
-            Permisos = new PermisoAdministrativo();
-            Permisos.COD = "3010";
-            Permisos.TEXT = "Permiso 1 dia";
-            ObjPerAdmi.Add(Permisos);
 
-            Permisos = new PermisoAdministrativo();
-            Permisos.COD = "3012";
-            Permisos.TEXT = "Permiso 1/2 dia";
-            ObjPerAdmi.Add(Permisos);
+            ListaDespegable lista = new ListaDespegable();
+
+            lista = new ListaDespegable();
+            lista.COD = "00";
+            lista.TEXT = "Seleccionar Certificado";
+            ObjCertif.Add(lista);
+
+            lista = new ListaDespegable();
+            lista.COD = "1";
+            lista.TEXT = "Certificado Antiguedad";
+            ObjCertif.Add(lista);
+
+            lista = new ListaDespegable();
+            lista.COD = "2";
+            lista.TEXT = "Certificado de Remuneraciones";
+            ObjCertif.Add(lista);
+        }
+
+        public void ListaMotivo()
+        {
+            ListaDespegable lista = new ListaDespegable();
+            lista = new ListaDespegable();
+            lista.COD = "00";
+            lista.TEXT = "Seleccionar Motivo";
+            ObjMotivo.Add(lista);
+
+            lista = new ListaDespegable();
+            lista.COD = "1";
+            lista.TEXT = "CCAA - Los Andes";
+            ObjMotivo.Add(lista);
+
+            lista = new ListaDespegable();
+            lista.COD = "2";
+            lista.TEXT = "Instituciones Bancarias";
+            ObjMotivo.Add(lista);
+
+            lista = new ListaDespegable();
+            lista.COD = "3";
+            lista.TEXT = "Cooperativas";
+            ObjMotivo.Add(lista);
+
+            lista = new ListaDespegable();
+            lista.COD = "4";
+            lista.TEXT = "Otro";
+            ObjMotivo.Add(lista);
+        }
+
+
+        public void ObtieneCtas()
+        {
+            ListaDespegable lista = new ListaDespegable();
+            for (int i = 0; i < 60; i++)
+            {
+                lista = new ListaDespegable();
+                var n = i + 1;
+                lista.COD = n.ToString();
+                lista.TEXT = "Cuota " + n.ToString();
+                ObjCtas.Add(lista);
+
+            }
+
         }
 
 

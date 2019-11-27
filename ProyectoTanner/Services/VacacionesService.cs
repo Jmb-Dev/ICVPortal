@@ -1,9 +1,6 @@
 ﻿using ProyectoTanner.Models;
-using ProyectoTanner.Controllers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 //using SAP.Middleware.Connector;
 
 namespace ProyectoTanner.Services
@@ -40,7 +37,7 @@ namespace ProyectoTanner.Services
             //List<ListaVacaciones> ListaVacaciones = new List<ListaVacaciones>();
             //List<Tablamensaje> ListaMensajes = new List<Tablamensaje>();
             //List<TipoVacaciones> listaTipoVacaciones = new List<TipoVacaciones>();
-            
+
 
             string retorno = "ERROR";
 
@@ -49,60 +46,60 @@ namespace ProyectoTanner.Services
                 if (!string.IsNullOrEmpty(usuario) && !string.IsNullOrEmpty(contrasena))
                     //retorno = conexion.connectionsSAP(usuario, contrasena);
 
-                if (string.IsNullOrEmpty(retorno))
-                {
-                    //RfcDestination SapRfcDestination = RfcDestinationManager.GetDestination(conexion.connectorConfig);
-                    //RfcRepository SapRfcRepository = SapRfcDestination.Repository;
+                    if (string.IsNullOrEmpty(retorno))
+                    {
+                        //RfcDestination SapRfcDestination = RfcDestinationManager.GetDestination(conexion.connectorConfig);
+                        //RfcRepository SapRfcRepository = SapRfcDestination.Repository;
 
-                    //IRfcFunction BapiGetUser = SapRfcRepository.CreateFunction("ZHR_GET_CONT");
+                        //IRfcFunction BapiGetUser = SapRfcRepository.CreateFunction("ZHR_GET_CONT");
 
-                    //BapiGetUser.SetValue("I_RUT", RUT);
+                        //BapiGetUser.SetValue("I_RUT", RUT);
 
-                    //BapiGetUser.Invoke(SapRfcDestination);
+                        //BapiGetUser.Invoke(SapRfcDestination);
 
-                    //lt_T_OUTPUT = BapiGetUser.GetTable("T_OUTPUT");
-                   
-                    //for (int i = 0; i < lt_T_OUTPUT.RowCount; i++)
-                    //{
-                    //    SalidaVacaciones = new ListaVacaciones();
+                        //lt_T_OUTPUT = BapiGetUser.GetTable("T_OUTPUT");
 
-                    //    SalidaVacaciones.ANZHL = lt_T_OUTPUT[i].GetString("ANZHL");
-                    //    SalidaVacaciones.KVERB = lt_T_OUTPUT[i].GetString("KVERB");
-                    //    SalidaVacaciones.DISPO = lt_T_OUTPUT[i].GetString("DISPO");
-                    //    SalidaVacaciones.KTART = lt_T_OUTPUT[i].GetString("KTART");
-                    //    SalidaVacaciones.KTEXT = lt_T_OUTPUT[i].GetString("KTEXT");
-                    //    ObjSalida.Add(SalidaVacaciones);
-                    //}
+                        //for (int i = 0; i < lt_T_OUTPUT.RowCount; i++)
+                        //{
+                        //    SalidaVacaciones = new ListaVacaciones();
 
-                    //lt_T_MENSAJE = BapiGetUser.GetTable("T_MENSAJE");
+                        //    SalidaVacaciones.ANZHL = lt_T_OUTPUT[i].GetString("ANZHL");
+                        //    SalidaVacaciones.KVERB = lt_T_OUTPUT[i].GetString("KVERB");
+                        //    SalidaVacaciones.DISPO = lt_T_OUTPUT[i].GetString("DISPO");
+                        //    SalidaVacaciones.KTART = lt_T_OUTPUT[i].GetString("KTART");
+                        //    SalidaVacaciones.KTEXT = lt_T_OUTPUT[i].GetString("KTEXT");
+                        //    ObjSalida.Add(SalidaVacaciones);
+                        //}
 
-                    //for (int j = 0; j < lt_T_MENSAJE.RowCount; j++)
-                    //{
-                    //    SalidaMensajes = new Tablamensaje();
+                        //lt_T_MENSAJE = BapiGetUser.GetTable("T_MENSAJE");
 
-                    //    SalidaMensajes.codigo = lt_T_MENSAJE[j].GetString("CODIGO");
-                    //    SalidaMensajes.mensaje = lt_T_MENSAJE[j].GetString("MENSAJE");
-                    //    Objmensaje.Add(SalidaMensajes);
-                    //}
+                        //for (int j = 0; j < lt_T_MENSAJE.RowCount; j++)
+                        //{
+                        //    SalidaMensajes = new Tablamensaje();
 
-                    //lt_T_VACACIONES = BapiGetUser.GetTable("T_VACACIONES");
+                        //    SalidaMensajes.codigo = lt_T_MENSAJE[j].GetString("CODIGO");
+                        //    SalidaMensajes.mensaje = lt_T_MENSAJE[j].GetString("MENSAJE");
+                        //    Objmensaje.Add(SalidaMensajes);
+                        //}
 
-                    //SalidaTipoVacaciones = new TipoVacaciones();
-                    //SalidaTipoVacaciones.COD_TIP = "01";
-                    //SalidaTipoVacaciones.DES_TIP = "Seleccioné";
-                    //ObjTipo.Add(SalidaTipoVacaciones);
+                        //lt_T_VACACIONES = BapiGetUser.GetTable("T_VACACIONES");
 
-                    //for (int k = 0; k < lt_T_VACACIONES.RowCount; k++)
-                    //{
-                    //    SalidaTipoVacaciones = new TipoVacaciones();
-                    //    if (lt_T_VACACIONES[k].GetString("COD_TIP") != "7001")
-                    //    {
-                    //        SalidaTipoVacaciones.COD_TIP = lt_T_VACACIONES[k].GetString("COD_TIP");
-                    //        SalidaTipoVacaciones.DES_TIP = lt_T_VACACIONES[k].GetString("DES_TIP");
-                    //        ObjTipo.Add(SalidaTipoVacaciones);
-                    //    }    
-                    //}
-                }
+                        //SalidaTipoVacaciones = new TipoVacaciones();
+                        //SalidaTipoVacaciones.COD_TIP = "01";
+                        //SalidaTipoVacaciones.DES_TIP = "Seleccioné";
+                        //ObjTipo.Add(SalidaTipoVacaciones);
+
+                        //for (int k = 0; k < lt_T_VACACIONES.RowCount; k++)
+                        //{
+                        //    SalidaTipoVacaciones = new TipoVacaciones();
+                        //    if (lt_T_VACACIONES[k].GetString("COD_TIP") != "7001")
+                        //    {
+                        //        SalidaTipoVacaciones.COD_TIP = lt_T_VACACIONES[k].GetString("COD_TIP");
+                        //        SalidaTipoVacaciones.DES_TIP = lt_T_VACACIONES[k].GetString("DES_TIP");
+                        //        ObjTipo.Add(SalidaTipoVacaciones);
+                        //    }    
+                        //}
+                    }
             }
             catch (Exception e)
             {
@@ -190,7 +187,7 @@ namespace ProyectoTanner.Services
             }
         }
 
-        public void AprobarRechazarVacaciones(string RUT, string STATUS, string NDOC, string  RUTEMPL, string usuario, string contrasena) // Aprobar y rechazar Solicitud de Vacaciones
+        public void AprobarRechazarVacaciones(string RUT, string STATUS, string NDOC, string RUTEMPL, string usuario, string contrasena) // Aprobar y rechazar Solicitud de Vacaciones
         {
             //IRfcTable lt_T_tablaMensajes;
 
@@ -199,7 +196,7 @@ namespace ProyectoTanner.Services
             //List<Tablamensaje> Listaprobarechazar = new List<Tablamensaje>();
 
             //ConexionController conexion = new ConexionController();
-           
+
             //string retorno = "ERROR";
 
             try
@@ -218,7 +215,7 @@ namespace ProyectoTanner.Services
                 //    BapiGetUser.SetValue("I_ESTATUS", STATUS);
                 //    BapiGetUser.SetValue("I_DOCNR", NDOC);
                 //    BapiGetUser.SetValue("I_ICNUM2", RUTEMPL);
-                
+
                 //    BapiGetUser.Invoke(SapRfcDestination);
 
                 //    lt_T_tablaMensajes = BapiGetUser.GetTable("T_MENSAJE");
@@ -280,7 +277,7 @@ namespace ProyectoTanner.Services
                 //    BapiGetUser.Invoke(SapRfcDestination);
 
                 //    lt_T_OUTPUT = BapiGetUser.GetTable("T_OUTPUT");
-                    
+
                 //    for (int i = 0; i < lt_T_OUTPUT.RowCount; i++)
                 //    {
                 //        SalidaListaPendienteAprob = new ListadosolicitudesPendientesAprobacion();
@@ -371,7 +368,7 @@ namespace ProyectoTanner.Services
                 //        Soli.SetValue("ICNUM2", Solicitud[i].ICNUM2);
                 //        Soli.SetValue("SPRPS", Solicitud[i].SPRPS);
                 //    }
-                    
+
                 //    BapiGetUser.Invoke(SapRfcDestination);
 
                 //    lt_T_MENSAJE = BapiGetUser.GetTable("T_MENSAJE");
@@ -548,7 +545,7 @@ namespace ProyectoTanner.Services
         }
 
         public void ObtieneDiasPermi()
-        {           
+        {
             PermisoAdministrativo Permisos = new PermisoAdministrativo();
             Permisos = new PermisoAdministrativo();
             Permisos.COD = "3010";

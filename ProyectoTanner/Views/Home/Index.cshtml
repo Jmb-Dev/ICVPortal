@@ -54,13 +54,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
-                                    <div class="dropdown-divider"></div>
+                                    @*<div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
                                     <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
-                                    <div class="dropdown-divider"></div>
+                                    <div class="dropdown-divider"></div>*@
                                 </ul>
                             </li>
                         }
@@ -74,12 +75,13 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
                         </div>
                     </li>
-                    @{
+                    @*@{
                         if (JEFE != "")
                         {
                             <li class="dropdown">
@@ -92,15 +94,19 @@
                                 </div>
                             </li>
                         }
-                    }
+                    }*@
                     <li class="dropdown">
                         @*@foreach (var item in Model)
                             {*@
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
                         @*}*@
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="LogOut">Cerrar Session</a>
-                        </div>
+                    <div class="dropdown-menu">
+
+              
+
+                        <a class="dropdown-item" href="CambioPass">Cambiar password</a>
+                        <a class="dropdown-item" href="LogOut">Cerrar Session</a>
+                    </div>
                     </li>
                 </ul>
     </div>
@@ -110,7 +116,7 @@
             <div class="heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <div class="row">
                     <div class="text-center col-sm-8 col-sm-offset-2">
-                        <h2 class="home-titulo">Portal de <span>AutoServicio</span><br>Recursos Humanos</h2>
+                        <h2 class="home-titulo">Portal de <span>AutoServicio</span><br>Gestion de Personas</h2>
                         <p class="home-bajada">En éste portal puedes consultar y bajar tus liquidaciones de sueldo, solicitar tus vacaciones y descargar cuantas veces necesites tus certificados de antigüedad.</p>
                     </div>
                 </div>

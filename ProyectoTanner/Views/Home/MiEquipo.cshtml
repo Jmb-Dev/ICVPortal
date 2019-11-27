@@ -22,6 +22,7 @@
     <link href="~/css/main.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="~/images/favicon2.ico">
+    <link rel="stylesheet" href="~/css/jquery.dataTables.min.css">
 </head>
 <body class="vacaciones">
     <!--.preloader-->
@@ -58,9 +59,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="MiEquipo">Aprobar Vacaciones</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="SolicitudMiEquipo">Registrar solicitudes</a>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    @*<div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>*@
                                 </ul>
                             </li>
                         }
@@ -74,116 +80,240 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
                         </div>
                     </li>
+                    @*@{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }*@
                     <li class="dropdown">
                         @*@foreach (var item in Model)
-                            {*@
+                        {*@
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
                         @*}*@
                         <div class="dropdown-menu">
+
+
+
+                            <a class="dropdown-item" href="CambioPass">Cambiar password</a>
                             <a class="dropdown-item" href="LogOut">Cerrar Session</a>
                         </div>
                     </li>
                 </ul>
     </div>
     <!--/#main-nav-->
-    <header>     
-            @using (Html.BeginForm(FormMethod.Post))
+    <header>
+
+        <div class="container">
+
+            @if (ViewBag.Mostrar != null)
             {
-                <div class="container">
-                    <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                            @if (ViewBag.Mostrar != null)
-                            {
-                                <div class="alert alert-warning">
-                                    <strong>@ViewBag.Mensaje</strong>
-                                </div>
-                            }
-                            else
-                            {
-                                @*<div class="alert alert-warning" style="visibility:hidden">
-                                    <strong></strong>.
-                                </div>*@
-                            }
-
-                        <h3>Aprobar solicitudes</h3>
-                        <div class="espacio-25"></div>
-                        <table class="table table-striped" id="assets-data-table">
-                            <thead>
-                                <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Rut</th>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Fecha Solicitud</th>
-                                    <th scope="col">Tipo</th>
-                                    <th scope="col">Desde</th>
-                                    <th scope="col">Hasta</th>
-                                    <th scope="col">Días solicitados</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                              @try
-                              {
-                                foreach (var item in ViewBag.MilistadoAProb)
-                                {
-                                    Docnr = item.DOCNR + "-" + item.ICNUM;
-
-                                    <tr>
-                                        <td>
-                                            @Html.RadioButtonFor(m => m.DOCNR, Docnr, new { id = item.DOCNR, required = "requered" })
-                                        </td>
-                                        <td>
-                                            @item.ICNUM
-                                        </td>
-                                        <td>@item.VORNA @item.NACHN @item.NACH2</td>
-                                        <td>@item.AEDTM</td>
-                                        <td>@item.ATEXT</td>
-                                        <td>@item.BEGDA</td>
-                                        <td>@item.ENDDA</td>
-                                        <td>@item.ABWTG</td>
-                                    </tr>
-                                  }
-                              }
-                              catch (Exception ex) {
-                                    
-                              }
-
-
-                                @if (@ViewBag.CountList == "2")
-	                                {
-                                    <tr>
-                                        <td colspan="8">No existen solicitudes por aprobar</td>
-                                    </tr>
-	                                }
-
-                            </tbody>
-                        </table>
-                    </div>
-                    @if (ViewBag.CountList == "1")
-                    {
-                        <div class="row">
-                            <div class="col-sm-2 col-xs-6">
-                                <div class="form-group">
-                                    <button type="submit" name="APROBAR" value="X" class="btn-primary btn-form btn-fullwidth">Aprobar</button>
-                                </div>
-                            </div>
-                            <div class="col-sm-2 col-xs-6">
-                                <div class="form-group">
-                                    <button type="submit" name="RECHAZAR" value="X" class="btn-primary btn-form btn-fullwidth">Rechazar</button>
-                                </div>
-                            </div>
-                        </div>
-                    }              
+                <div class="alert alert-warning">
+                    <strong>@ViewBag.Mensaje</strong>
                 </div>
             }
-</header><!--/#home-->
+
+            <div class="table-responsive marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                <h3>Mis solicitudes</h3>
+                <div class=""></div>
+                <table class="display compact  tablaSol">
+                    <thead>
+                        <tr>
+                            <th scope="col">id Solicitud</th>
+                            <th scope="col">Unidad Organizativa</th>
+                            <th scope="col">Solicitante</th>
+                            <th scope="col">Fecha Registro</th>
+                            <th scope="col">Tipo de Solicitud</th>
+                            @*<th scope="col">Estado de Solicitud</th>*@
+                            <th scope="col">Acciones</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.MilistadoAProb)
+                        {
+
+                            <tr>
+                                <td>@item.id_solicitud</td>
+                                <td>@item.id_unidad_org</td>
+                                <td>@item.nombre</td>
+                                <td>@item.fecha_registro</td>
+                                @if (@item.id_tipo_solicitud == "1")
+                                {
+                                    <td class="tipo">Solicitud de Absentismo</td>
+                                }
+                                else if (@item.id_tipo_solicitud == "2")
+                                {
+                                    <td class="tipo">Solicitud de Certificado</td>
+                                }
+                                else if (@item.id_tipo_solicitud == "3")
+                                {
+                                    <td class="tipo">Solicitud de Cambio Contractual</td>
+                                }
+
+                                @*@if (item.estado_solicitud == "0")
+                                {
+                                    <td>"Pendiente de Aprobación"</td>
+                                }
+                                else if (item.estado_solicitud == "1")
+                                {
+                                    <td>"Aprobado"</td>
+                                }
+                                else if (item.estado_solicitud == "2")
+                                {
+                                    <td>"Rechazado"</td>
+                                }*@
+
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-ver" data-id="@item.id_solicitud" data-tipo="@item.id_tipo_solicitud" data-nombre="@item.nombre" data-toggle="modal" data-target=".bd-example-modal-xl">ver</button>
+                                    <button type="button" class="btn btn-danger btn-rech" data-id="@item.id_solicitud" data-tipo="@item.id_tipo_solicitud" data-nombre="@item.nombre" data-toggle="modal" data-target=".bd-example-modal-xl">rechazar</button>
+                                    <button type="button" class="btn btn-success btn-aprob" data-id="@item.id_solicitud" data-tipo="@item.id_tipo_solicitud" data-toggle="modal" data-target=".bd-example-modal-xl">aprobar</button>
+
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div id='myModal' class='modal'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'></div>
+                </div>
+            </div>
+        </div>
+
+
+    </header><!--/#home-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="~/js/jquery.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/js/wow.min.js"></script>
     <script type="text/javascript" src="~/js/lightbox.min.js"></script>
     <script type="text/javascript" src="~/js/main.js"></script>
+    <script type="text/javascript" src="~/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/js/Solicitudes.js"></script>
+    <style>
+        #mydiv {
+            width: 80% !important;
+        }
+
+        #mycontent {
+            width: 100% !important;
+        }
+    </style>
+    <script>
+
+        $(document).on('click', '.btn-ver', function (e) {
+            console.log("ver");
+            var TeamDetailPostBackURL = 'VerSolicitudJefatura';
+            //debugger;
+
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var tipo = $buttonClicked.attr('data-tipo');
+            var nombre = $buttonClicked.attr('data-nombre');
+
+
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "idSolicitud": id, "idTipo": tipo, "Nombre": nombre},
+                datatype: "json",
+                success: function (data) {
+                    //debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+        });
+
+        $(document).on('click', '.btn-rech', function (e) {
+            console.log("rechazado");
+            //debugger;
+            var TeamDetailPostBackURL = 'JefeRechazar';
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var tipo = $buttonClicked.attr('data-tipo');
+            var nombre = $buttonClicked.attr('data-nombre');
+
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "idSolicitud": id, "idTipo": tipo, "Nombre": nombre },
+                datatype: "json",
+                success: function (data) {
+                    //debugger;
+                    $('#myModalContent').html(data);
+                    $('#myModal').modal(options);
+                    $('#myModal').modal('show');
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+        });
+
+         $(document).on('click', '.btn-aprob', function (e) {
+            console.log("aprobar");
+            //debugger;
+            var TeamDetailPostBackURL = 'JefeAprobar';
+            var $buttonClicked = $(this);
+            var id = $buttonClicked.attr('data-id');
+            var tipo = $buttonClicked.attr('data-tipo');
+
+            var options = { "backdrop": "static", keyboard: true };
+            $.ajax({
+                type: "GET",
+                url: TeamDetailPostBackURL,
+                contentType: "application/json; charset=utf-8",
+                data: { "idSolicitud": id, "idTipo": tipo },
+                datatype: "json",
+                success: function (data) {
+                    //debugger;
+                    //$('#myModalContent').html(data);
+                    //$('#myModal').modal(options);
+                    //$('#myModal').modal('show');
+                    alert("Solicitud Aprobada.");
+                    location.href = "@Url.Action("CerrarSolJefe", "Home")";
+
+                },
+                error: function () {
+                    alert("Dynamic content load failed.");
+                }
+            });
+
+        });
+
+    </script>
 </body>
 </html>

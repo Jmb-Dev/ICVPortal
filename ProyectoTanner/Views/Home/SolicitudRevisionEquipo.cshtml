@@ -36,7 +36,7 @@
     <div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>
     <!--/.preloader-->
     <div class="main-nav">
-        <ul class="container-fluid">
+        <ul class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -54,9 +54,9 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solicitud <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <a class="dropdown-item" href="@Url.Action("Solicitud", "Home")">Solicitud de vacaciones</a>
+                            <a class="dropdown-item" href="Solicitud">Solicitud de vacaciones</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("MisSolicitudes", "Home")">Mis Solicitudes (historial)</a>
+                            <a class="dropdown-item" href="MisSolicitudes">Mis Solicitudes (historial)</a>
                         </ul>
                     </li>
                     @{
@@ -66,9 +66,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    @*<div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>*@
                                 </ul>
                             </li>
                         }
@@ -76,56 +81,47 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Liquidación <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <a class="dropdown-item" href="@Url.Action("VerLiquidacion", "Home")">Liquidación</a>
+                            <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
                         </ul>
                     </li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="@Url.Action("Antiguedad", "Home")">Antigüedad General</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("Remuneracion", "Home")">Remuneración</a>
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
                         </div>
                     </li>
-
-                    <!-- Codigo nuevo -->
-                    @*<li class="dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Equipo Trabajo <span class="caret"></span></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="@Url.Action("Index", "EquipoTrabajo")">Equipo Trabajo</a>
-                            </div>
-                        </li>*@
-
-                    @*<li class="dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Incidentes de Nómina <span class="caret"></span></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="@Url.Action("Index", "IncidentesNomina")">Incidentes de Nómina</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="@Url.Action("Graficos", "IncidentesNomina")">Graficos</a>
-                            </div>
-                        </li>*@
-
-                    @*<li class="dropdown">
-                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Organigrama <span class="caret"></span></a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="@Url.Action("Index", "Organigrama")">Organigrama</a>
-                            </div>
-                        </li>*@
-                    <!-- FIN - Codigo nuevo -->
-                    @*  <li class="dropdown">*@
-                    @*@foreach (var item in Model)
+                    @*@{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }*@
+                    <li class="dropdown">
+                        @*@foreach (var item in Model)
                         {*@
-                    @*  <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>*@
-                    @*}*@
-                    @*<div class="dropdown-menu">
-                            <a class="dropdown-item" href="@Url.Action("LogOut", "Home")">Cerrar Sesion</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("Index", "AdmContenido")">Administrar Contenido</a>
-                        </div>*@
-                    @*  </li>*@
+                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
+                        @*}*@
+                        <div class="dropdown-menu">
+
+
+
+                            <a class="dropdown-item" href="CambioPass">Cambiar password</a>
+                            <a class="dropdown-item" href="LogOut">Cerrar Session</a>
+                        </div>
+                    </li>
                 </ul>
     </div>
-    <!--/#main-nav-->
     <header>
         <div class="container">
             <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
@@ -183,7 +179,7 @@
 
                     <div class="form-group" style="width:50%">
                         <label for="camp1">Mensaje:</label>
-                        @Html.TextArea("Mensaje", "", new { @class = "form-control", @cols = 50, @rows = 2 })  
+                        @Html.TextArea("Mensaje", "", new { @class = "form-control", @cols = 50, @rows = 2 })
 
                     </div>
                     <div class="espacio-25"></div>
@@ -196,37 +192,37 @@
             </div>
         </div>
         <div class="container">
-            @using (Html.BeginForm("enviar", "HOME", FormMethod.Post, new { @class = "form-inline"}))
+            @using (Html.BeginForm("enviar", "HOME", FormMethod.Post, new { @class = "form-inline" }))
             {
                 <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                     <h3>Agregar Trabajador</h3>
                     <div class="espacio-25"></div>
                     <div class="container">
                         @*<form class="form-inline" role="form">*@
-                            <div class="form-group">
-                                <label for="camp1">Rut:</label>
-                                @Html.TextBox("RutColabor", "", new { @style = "display:hidden;" })
-                            </div>
-                            <div class="form-group">
-                                <label for="camp2">Nombre Trabajador:</label>
-                                @Html.TextBox("Nombre", "", new { @style = "display:hidden;" })
-                            </div>
-                            <div class="form-group">
-                                <label for="camp3">Descripción Posición:</label>
-                                @Html.TextBox("Posicion", "", new { @style = "display:hidden;" })
-                            </div>
+                        <div class="form-group">
+                            <label for="camp1">Rut:</label>
+                            @Html.TextBox("RutColabor", "", new { @style = "display:hidden;" })
+                        </div>
+                        <div class="form-group">
+                            <label for="camp2">Nombre Trabajador:</label>
+                            @Html.TextBox("Nombre", "", new { @style = "display:hidden;" })
+                        </div>
+                        <div class="form-group">
+                            <label for="camp3">Descripción Posición:</label>
+                            @Html.TextBox("Posicion", "", new { @style = "display:hidden;" })
+                        </div>
                         @*</form>*@
                         <div class="espacio-25"></div>
 
                         <div class="form-group" style="width:50%">
                             <label for="camp1">Mensaje:</label>
                             <br />
-                            @Html.TextArea("Mensaje", "", new { @class = "form-control", @cols = 80, @rows = 2 })                     
+                            @Html.TextArea("Mensaje", "", new { @class = "form-control", @cols = 80, @rows = 2 })
                         </div>
                     </div>
                     <div class="espacio-25"></div>
-                    <div class="form-group pull-right">                     
-                            @Html.TextBox("ACCION", "A", new { style = "display:none;" })
+                    <div class="form-group pull-right">
+                        @Html.TextBox("ACCION", "A", new { style = "display:none;" })
                         <button type="submit" value="Solicitud" class="btn-primary btn-form btn-fullwidth">Agregar al Equipo</button>
                     </div>
                     <div class="espacio-25"></div>

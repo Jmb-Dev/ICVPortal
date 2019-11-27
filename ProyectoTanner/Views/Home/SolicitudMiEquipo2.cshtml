@@ -65,9 +65,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="MiEquipo">Aprobar Vacaciones</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="SolicitudMiEquipo">Registrar solicitudes</a>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    @*<div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>*@
                                 </ul>
                             </li>
                         }
@@ -81,26 +86,41 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
                         </div>
                     </li>
+                    @*@{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }*@
                     <li class="dropdown">
                         @*@foreach (var item in Model)
-                            {*@
+                        {*@
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
                         @*}*@
                         <div class="dropdown-menu">
+
+
+
+                            <a class="dropdown-item" href="CambioPass">Cambiar password</a>
                             <a class="dropdown-item" href="LogOut">Cerrar Session</a>
                         </div>
                     </li>
                 </ul>
-            </ul>
-        </ul>
     </div>
-
-    <!--/#main-nav-->
     <header>
         <div class="container">
             @using (Html.BeginForm("SolicitudMiEquipo2", "HOME", FormMethod.Post))
@@ -151,7 +171,7 @@
                         </tbody>
                     </table>
                 </div>
-                if(ViewBag.ocultar)//Ocultar Div
+                if (ViewBag.ocultar)//Ocultar Div
                 {
                     <div id="div" class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                         <h3>Solicitud de Vacaciones y/o Permisos</h3>

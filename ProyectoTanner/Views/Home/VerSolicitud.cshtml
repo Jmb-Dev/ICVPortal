@@ -1,28 +1,40 @@
 ﻿<div>
 
     <div class="modal-header">
-        <h4 class="modal-title" id="myModalLabel">Comprobante de vacaciones</h4>
+        <h4 class="modal-title" id="myModalLabel">Detalle de Solicitud</h4>
     </div>
-       @if (ViewBag.Mostrar != null)
-                {
-                    <div class="alert alert-warning">
-                       <strong>@ViewBag.Mensaje</strong>                  
-                    </div>
-                }
-                else
-                {
-                    @*<div class="alert alert-warning" style="visibility:hidden">
-                        <strong></strong>.
-                    </div>*@
-                }
 
-    <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-        <div class="embed-responsive embed-responsive-16by9">
-            <object class="embed-responsive-item" data="@ViewBag.vercomprobante" type="application/pdf" internalinstanceid="9" title="">
-                <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
-            </object>
+
+    @if (@ViewBag.tipo == "1")
+    {
+        <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="embed-responsive embed-responsive-16by9">
+                <object class="embed-responsive-item" data="@ViewBag.vercomprobante" type="application/pdf" internalinstanceid="9" title="">
+                    <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
+                </object>
+            </div>
         </div>
-    </div>
-    <button type="button" value="Cerrar" onclick="location.href='@Url.Action("CerrarSolicitud", "Home")'" class="btn-primary btn-form btn-fullwidth">Cerrar</button>
+    }
+    else if (@ViewBag.tipo == "2")
+    {
+        
+        <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <div class="embed-responsive embed-responsive-16by9">
+                <object class="embed-responsive-item" data="@ViewBag.Certificado" type="application/pdf" internalinstanceid="9" title="">
+                    <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
+                </object>
+            </div>
+        </div>
 
-</div>  
+    }
+    else if (ViewBag.tipo == "3")
+    {
+
+    }
+
+    <div class="modal-footer">
+        <button type="button" value="Cerrar" onclick="location.href='@Url.Action("CerrarSolicitud", "Home")'" class="btn btn-secondary btn-form" data-dismiss="modal">Cerrar</button>
+    </div>
+
+
+</div>

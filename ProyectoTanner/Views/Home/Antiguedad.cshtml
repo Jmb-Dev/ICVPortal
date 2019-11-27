@@ -56,9 +56,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="MiEquipo">Aprobar Vacaciones</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="SolicitudMiEquipo">Registrar solicitudes</a>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    @*<div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>*@
                                 </ul>
                             </li>
                         }
@@ -72,120 +77,175 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
                         </div>
                     </li>
+                    @*@{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }*@
                     <li class="dropdown">
                         @*@foreach (var item in Model)
-                            {*@
+                        {*@
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
                         @*}*@
                         <div class="dropdown-menu">
+
+
+
+                            <a class="dropdown-item" href="CambioPass">Cambiar password</a>
                             <a class="dropdown-item" href="LogOut">Cerrar Session</a>
                         </div>
                     </li>
                 </ul>
     </div>
-    <!--/#main-nav-->
-
     <header>
         <div class="container">
             <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                @if (ViewBag.Mostrar != null)
+                {
+                    <div class="alert alert-warning">
+                        <strong>@ViewBag.Mensaje</strong>
+                    </div>
+                }
+                else
+                {
+                }
                 <h3>Certificados</h3>
                 <div class="espacio-25"></div>
-                @using (Html.BeginForm(FormMethod.Post))
+                @using (Html.BeginForm("Sol_Certificado", "HOME", FormMethod.Post))
                 {
                     <div class="row">
-                        <div class="col-sm-3 col-xs-4">
+                        <div class="col-sm-4 col-xs-4">
                             Selecciona el tipo de Certificado
                         </div>
                         <div class="col-sm-3 col-xs-5">
                             <div class="form-group">
-                                @Html.DropDownList("DropMeses", new SelectList(ViewBag.Tipos, "", "", ViewBag.SelectedValue), new { @class = "form-control" })
+                                @Html.DropDownList("ListCert", new SelectList(ViewBag.ListCert, "COD", "TEXT"), new { @class = "form-control" })
                             </div>
                         </div>
-                        @*<div class="col-sm-2 col-xs-3">
-                                <div class="form-group">
-                                    <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
-                                </div>
-                            </div>*@
                     </div>
-                }
 
-                @using (Html.BeginForm(FormMethod.Post))
-                {
                     <div class="row">
-                        <div class="col-sm-3 col-xs-4">
+                        <div class="col-sm-4 col-xs-4">
                             Para ser presentado
                         </div>
                         <div class="col-sm-3 col-xs-5">
                             <div class="form-group">
-                                @Html.DropDownList("DropMeses", new SelectList(ViewBag.Motivos, "", "", ViewBag.SelectedValue), new { @class = "form-control" })
+                                @Html.DropDownList("ListMotivos", new SelectList(ViewBag.ListMotivos, "COD", "TEXT"), new { @class = "form-control", @onchange = "callChangefunc(this.value)" })
                             </div>
                         </div>
-                        @*<div class="col-sm-2 col-xs-3">
-                                <div class="form-group">
-                                    <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
-                                </div>
-                            </div>*@
-                    </div>
-                }
 
-                @using (Html.BeginForm("solici", "HOME", FormMethod.Post))
-                {
+                        <div class="col-sm-3 col-xs-5">
+                            <div class="form-group">
+                                @Html.TextBoxFor(a => a.otroMotivo, new { @id = "otroMotivo", @class = "form-control", @placeholder = "Otro Motivo", @disabled = "diabled" })
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="row">
-                        <div class="col-sm-3 col-xs-4">
-                            Para ser presentado
+                        <div class="col-sm-4 col-xs-4">
+                            Nro de Ctas
                         </div>
                         <div class="col-sm-3 col-xs-5">
                             <div class="form-group">
-                                @Html.DropDownList("test1", new SelectList(ViewBag.MiPermi, "COD", "TEXT"), new { @class = "form-control" })
+                                @Html.DropDownList("LtaCtas", new SelectList(ViewBag.LtaCtas, "COD", "TEXT"), new { @class = "form-control", @id = "LtaCtas", disabled = "disabled" })
                             </div>
                         </div>
-                        @*<div class="col-sm-2 col-xs-3">
-                                <div class="form-group">
-                                    <button type="submit" class="btn-primary btn-form btn-fullwidth">Ver</button>
-                                </div>
-                            </div>*@
                     </div>
 
 
+
                     <div class="row">
-
-                        <div class="col-md-5 mb-3">
-                             @Html.TextBoxFor(a => a.valorCred , new { @class = "form-control", @placeholder = "Total Credito", required = "requered" })
+                        <div class="col-sm-4 col-xs-4">
+                            Total Credito
+                        </div>
+                        <div class="col-sm-3 col-xs-5">
+                            @Html.TextBoxFor(a => a.valorCred, new { @id = "valorCred", @class = "form-control", @placeholder = "Total Credito", required = "requered", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="espacio-25"></div>
+                    <div class="row">
+                        <div class="col-sm-4 col-xs-4">
+                            Valor Cuota
+                        </div>
+                        <div class="col-sm-3 col-xs-5">
+                            @Html.TextBoxFor(a => a.valorCta, new { @id = "valorCta", @class = "form-control", @placeholder = "Valor Cuota", required = "requered", disabled = "disabled" })
 
                         </div>
-                        <div class="col-md-4 mb-3">
-                            @Html.TextBoxFor(a => a.nrocta, new { @class = "form-control", @placeholder = "Nro Ctas", required = "requered" })
 
-                        </div>
-                        <div class="col-md-3 mb-3">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-3 col-xs-5">
                             <button type="submit" class="btn-primary btn-form btn-fullwidth">Enviar</button>
                         </div>
-
                     </div>
                 }
             </div>
         </div>
 
-        <div class="container">
-            <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
-                <h3>Certificado de Antigüedad General</h3>
-                <div class="espacio-25"></div>
-                <div class="embed-responsive embed-responsive-16by9">
-                    <div class="center">
-                        <p><img src="~/images/loading.gif"</p>
+
+
+        @*<div class="container"  style="visibility: hidden">
+                <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+                    <h3>Certificado de Antigüedad General</h3>
+                    <div class="espacio-25"></div>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <div class="center">
+                            <p><img src="~/images/loading.gif"</p>
+                        </div>
+                        <object class="embed-responsive-item" data="@ViewBag.Antiguedad" type="application/pdf" internalinstanceid="9" title="">
+                            <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
+                        </object>
                     </div>
-                    <object class="embed-responsive-item" data="@ViewBag.Antiguedad" type="application/pdf" internalinstanceid="9" title="">
-                        <p>Su navegador no admite archivos pdf incrustados. Puedes descargar el archivo.</p>
-                    </object>
                 </div>
-            </div>
-        </div>
+            </div>*@
     </header><!--/#home-->
+
+    <script>
+        function callChangefunc(val) {
+            console.log(val);
+
+            if (val == '1') {
+                document.getElementById('valorCred').value = '';
+                document.getElementById('valorCred').disabled = false;
+                document.getElementById('LtaCtas').disabled = false;
+                document.getElementById('valorCta').disabled = false;
+
+            } else if (val == '4') {
+                document.getElementById('otroMotivo').disabled = false;
+            }
+            else {
+                document.getElementById('valorCred').disabled = true;
+                document.getElementById('LtaCtas').disabled = true;
+                document.getElementById('valorCta').disabled = true;
+                document.getElementById('valorCred').value = '';
+                 document.getElementById('otroMotivo').disabled = true;
+                    document.getElementById('otroMotivo').value = '';
+            }
+
+           
+                   
+            
+        };
+       
+    </script>
 
     <script type="text/javascript" src="~/js/jquery.js"></script>
     <script type="text/javascript" src="~/js/bootstrap.min.js"></script>

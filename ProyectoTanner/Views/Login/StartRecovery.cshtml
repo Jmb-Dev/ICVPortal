@@ -1,0 +1,35 @@
+﻿
+@model ProyectoTanner.Models.ViewModel.RecoveryViewModel
+
+@{
+    ViewBag.Title = "StartRecovery";
+    Layout = "~/Views/Shared/_Layout_Login.cshtml";
+}
+
+<!--.preloader-->
+@*<div class="preloader"> <i class="fa fa-circle-o-notch fa-spin"></i></div>*@
+<!--/.preloader-->
+<header>
+    <div class="container">
+        <div class="col-xs-10 col-sm-6 col-xs-offset-1 col-sm-offset-3 marco-login wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
+            <img src="~/images/logo-tanner-azul.png" class="img-responsive center-block espacio-25" />
+            @*<div class="row">*@
+                @*<div class="col-md-6 offset-3">*@
+                    <div class="form-style">
+                        <form action="@Url.Content("~/Login/StartRecovery")" method="post">
+                            <hr />
+                            <div class="form-group">
+                                <div class="text-center">
+                                    @Html.TextBoxFor(d => d.Email, null, new { @class = "form-control", @placeholder = "Escribe tu Correo Electrónico" })
+                                    @Html.ValidationMessageFor(d => d.Email, null, new { style = "color:red" })
+
+                                    <button class=" btn-submit btn-fullwidth">Recuperar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                @*</div>*@
+            @*</div>*@
+        </div>
+    </div>
+</header>

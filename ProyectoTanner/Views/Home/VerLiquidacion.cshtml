@@ -37,7 +37,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="Index">
-                    <h1><img class="img-responsive" src="~/images/logo-tanner-azul.png" alt="logo"></h1>
+                    <h1><img class="img-responsive" src="~/images/logo-tanner-blanco.png" alt="logo"></h1>
                 </a>
             </div>
             <ul class="collapse navbar-collapse">
@@ -58,9 +58,14 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi equipo <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="MiEquipo">Aprobar Vacaciones</a>
+                                    @*<a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Vacaciones</a>*@
+                                    <a class="dropdown-item" href="@Url.Action("MiEquipo", "Home")">Aprobar Solicitudes</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="SolicitudMiEquipo">Registrar solicitudes</a>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudMiEquipo", "Home")">Registrar solicitudes</a>
+                                    @*<div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="@Url.Action("SolicitudRevisionEquipo", "Home")">Solicitud Revision Equipo</a>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>*@
                                 </ul>
                             </li>
                         }
@@ -71,20 +76,39 @@
                             <a class="dropdown-item" href="VerLiquidacion">Liquidación</a>
                         </ul>
                     </li>
-                      <li class="dropdown">
+                    <li class="dropdown">
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Certificados <span class="caret"></span></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="Antiguedad">Antigüedad General</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>
+                            @*<a class="dropdown-item" href="Antiguedad">Antigüedad General</a>*@
+                            <a class="dropdown-item" href="Antiguedad">Certificados</a>
+                            @*<div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Remuneracion">Remuneración</a>*@
                         </div>
                     </li>
+                    @*@{
+                        if (JEFE != "")
+                        {
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reportes<span class="caret"></span></a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Reporte Absentismo</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="ReporteAbsentismo">Historial Aprobacion HH</a>
+                                    <div class="dropdown-divider"></div>
+                                </div>
+                            </li>
+                        }
+                    }*@
                     <li class="dropdown">
                         @*@foreach (var item in Model)
-                            {*@
+                        {*@
                         <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">@(Session["NombreUsuario"]) <span class="caret"></span></a>
                         @*}*@
                         <div class="dropdown-menu">
+
+
+
+                            <a class="dropdown-item" href="CambioPass">Cambiar password</a>
                             <a class="dropdown-item" href="LogOut">Cerrar Session</a>
                         </div>
                     </li>
@@ -95,14 +119,15 @@
             <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                 <h3>Liquidación de sueldo</h3>
                 <div class="espacio-25"></div>
-        @using (Html.BeginForm(FormMethod.Post)) { 
+                @using (Html.BeginForm(FormMethod.Post))
+                {
                     <div class="row">
                         <div class="col-sm-3 col-xs-4">
                             Selecciona el mes
                         </div>
                         <div class="col-sm-3 col-xs-5">
                             <div class="form-group">
-                                @Html.DropDownList("DropMeses", new SelectList(ViewBag.Fechas, "", "", ViewBag.SelectMes), new { @class = "form-control" }) 
+                                @Html.DropDownList("DropMeses", new SelectList(ViewBag.Fechas, "", "", ViewBag.SelectMes), new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="col-sm-2 col-xs-3">
@@ -113,7 +138,8 @@
                     </div>
                 }
             </div>
-            @if (ViewBag.control == "1") {
+            @if (ViewBag.control == "1")
+            {
                 <div class="marco02 heading wow fadeInUp" data-wow-duration="1000ms" data-wow-delay="300ms">
                     <div class="embed-responsive embed-responsive-16by9">
                         <div class="center">

@@ -1,0 +1,72 @@
+﻿<div>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Detalle de rechazo</h4>
+    </div>
+    
+    
+
+    <div class="modal-body">
+        <div>
+            <div class="form-group">
+                <label for="Solicitud">Solicitud</label>
+                <input type="text" class="form-control" id="Solicitud" placeholder="@ViewBag.id" disabled>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="Nombre">Nombre</label>
+                <input type="text" class="form-control" id="Nombre" placeholder="@ViewBag.Nombre" disabled>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="motivoRechazo">motivo de rechazo</label>
+            <textarea class="form-control" id="motivoRechazo" rows="3"></textarea>
+        </div>
+    </div>
+
+
+
+    <div class="modal-footer">
+        <button type="button" value="Cerrar" onclick="location.href='@Url.Action("CerrarSolJefe", "Home")'" class="btn btn-secondary btn-form" data-dismiss="modal">Cerrar</button>
+        <td><button type="button" class="btn btn-danger btn-aceptar" data-tipo="@ViewBag.tipo" data-id="@ViewBag.id" data-apr="@ViewBag.apr" data-toggle="modal" data-target=".bd-example-modal-xl">Aceptar</button></td>
+    </div>
+
+
+</div>
+
+
+<script>
+       
+    $(document).on('click', '.btn-aceptar', function (e) {
+
+        var TeamDetailPostBackURL = 'RechazarSolicitudJefe';
+        //debugger;
+
+        var $buttonClicked = $(this);
+        var id = $buttonClicked.attr('data-id');
+        var apr = $buttonClicked.attr('data-apr');
+        var tipo = $buttonClicked.attr('data-tipo');
+        var texto = document.getElementById("motivoRechazo").value;
+
+
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            type: "GET",
+            url: TeamDetailPostBackURL,
+            contentType: "application/json; charset=utf-8",
+            data: { "idSolicitud": id, "Texto": texto, "Apr" : apr, "idTipo":tipo },
+            datatype: "json",
+            success: function (data) {
+                  alert(data);
+                location.href = "@Url.Action("CerrarSolJefe", "Home")";
+               
+
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+            }
+        });
+    });
+
+</script>

@@ -1,0 +1,85 @@
+﻿<div>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Detalle de Solicitud N°: @ViewBag.id</h4>
+    </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+
+            @if (@ViewBag.tipo == "1")
+            {
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" placeholder="@ViewBag.Nombre" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="tipo">Tipo de Absentismo</label>
+                        <input type="text" class="form-control" id="tipo" placeholder="@ViewBag.text_tipo" disabled>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="FechaIni">Fecha de Inicio</label>
+                        <input type="text" class="form-control" id="FechaIni" placeholder="@ViewBag.abs.fecha_ini" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="FechaFin">Fecha de Fin</label>
+                        <input type="text" class="form-control" id="FechaFin" placeholder="@ViewBag.abs.fecha_fin" disabled>
+                    </div>
+                </div>
+
+            }
+            else if (@ViewBag.tipo == "2")
+            {
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="Nombre">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" placeholder="@ViewBag.Nombre" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="tipoCert">Tipo de Certificado</label>
+                        <input type="text" class="form-control" id="tipoCert" placeholder="@ViewBag.text_tipo" disabled>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="motivo">Motivo</label>
+                        <input type="text" class="form-control" id="motivo" placeholder="@ViewBag.text_motivo" disabled>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="VCred">Valor Credito</label>
+                        <input type="text" class="form-control" id="VCred" placeholder="@ViewBag.cert.valor_credito" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="VCta">Valor Cuota</label>
+                        <input type="text" class="form-control" id="VCta" placeholder="@ViewBag.cert.valor_cuota" disabled>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="NCtas">N° de cuotas</label>
+                        <input type="text" class="form-control" id="NCtas" placeholder="@ViewBag.cert.cantidad_cuota" disabled>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.tipo == "3")
+            {
+
+            }
+        </div>
+    </div>
+
+
+    <div class="modal-footer">
+        <button type="button" value="Cerrar" onclick="location.href='@Url.Action("CerrarSolJefe", "Home")'" class="btn btn-secondary btn-form" data-dismiss="modal">Cerrar</button>
+    </div>
+
+
+</div>

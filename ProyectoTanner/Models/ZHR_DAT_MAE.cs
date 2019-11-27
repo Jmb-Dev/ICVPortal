@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace ProyectoTanner.Models
 {
@@ -17,6 +14,8 @@ namespace ProyectoTanner.Models
         public string SALAR { get; set; }
         public string CTTXT { get; set; }
         public string JEFE { get; set; }
+        public string ORGEH { get; set; }
+        public string PERNR { get; set; }
         public string CODIGO { get; set; }
         public string MENSAJE { get; set; }
     }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace ProyectoTanner.Models
+﻿namespace ProyectoTanner.Models
 {
     public class Certificado
     {
-
+        public string otroMotivo { get; set; }
         public string valorCred { get; set; }
         public string nrocta { get; set; }
+        public string valorCta { get; set; }
     }
 
 }

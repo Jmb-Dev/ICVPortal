@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Configuration;
-using System.IO;
-using System.Data;
-using iTextSharp.text;
-using iTextSharp.text.pdf;
-using iTextSharp.text.pdf.parser;
-//using SAP.Middleware.Connector;
+﻿//using SAP.Middleware.Connector;
 using ProyectoTanner.Controllers;
+using System;
+using System.Web;
 
 namespace ProyectoTanner.Certificados
 {
@@ -39,9 +31,9 @@ namespace ProyectoTanner.Certificados
                     //    retorno = conexion.connectionsSAP(usuario, contrasena);
 
                     if (string.IsNullOrEmpty(retorno))
-                    {   
+                    {
 
-                       
+
                         //RfcDestination SapRfcDestination = RfcDestinationManager.GetDestination(conexion.connectorConfig);
                         //RfcRepository SapRfcRepository = SapRfcDestination.Repository;
 
