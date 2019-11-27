@@ -155,10 +155,10 @@ namespace ProyectoTanner.Controllers
                                 break;
                         }
 
-                        mensaje = "Usted tiene una solicitud pendiente de aprobación";
+                        mensaje = "<p>Usted tiene una solicitud pendiente de aprobación";
                         mensaje += " , con el ID: ";
                         mensaje += idSolicitud;
-                        mensaje += ".";
+                        mensaje += ". </p>";
                         string token = Session["Token"].ToString();
 
                         ApiController api = new ApiController();
@@ -440,11 +440,11 @@ namespace ProyectoTanner.Controllers
                                 db.Conexion();
                                 string correo = db.Obtener_Mail(item.aprobador);
                                 string asunto = "Solicitud de Vacaciones";
-                                string mensaje = "se ha enviado una solicitud de vacaciones para el colaborador ";
+                                string mensaje = "<p>se ha enviado una solicitud de vacaciones para el colaborador ";
                                 mensaje += nombre;
                                 mensaje += " , con el ID: ";
                                 mensaje += id_solicitud;
-                                mensaje += ".";
+                                mensaje += ". </p>";
                                 string token = Session["Token"].ToString();
 
                                 ApiController api = new ApiController();
