@@ -16,7 +16,8 @@ namespace ProyectoTanner.Controllers
         string Jefe = "JEFE";//string.Empty;
         string NombreEmpleado = string.Empty;
         string ApellidoEmpleado = string.Empty;
-        string urlDomain = "http://localhost:5749/";
+        //string urlDomain = "http://localhost:5749/";
+        string urlDomain = "https://portalautoatencionicv.qhr.cl/";
 
         // GET: Login
         public ActionResult Login()
@@ -126,13 +127,13 @@ namespace ProyectoTanner.Controllers
             {
                 if (token == null || token.Trim().Equals(""))
                 {
-                    ViewBag.Error = "Su Link ha Expirado";
+                    ViewBag.Error = "Su enlace ha Expirado";
                     return View("Login");
                 }
                 var oUser = db.usuarios.Where(d => d.token == model.Token).FirstOrDefault();
                 if (oUser == null)
                 {
-                    ViewBag.Error = "Su Link ha Expirado";
+                    ViewBag.Error = "Su enlace ha Expirado";
                     return View("Login");
                 }
             }
